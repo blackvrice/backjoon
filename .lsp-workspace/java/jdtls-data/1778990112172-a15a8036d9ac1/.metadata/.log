@@ -1,0 +1,387 @@
+!SESSION 2026-05-17 12:55:12.329 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=26.0.1
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Command-line arguments:  -data C:\web\backjoon\.lsp-workspace\java\jdtls-data\1778990112172-a15a8036d9ac1
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:13.513
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:13.607
+!MESSAGE Started org.eclipse.buildship.core 30ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:13.609
+!MESSAGE Started org.eclipse.m2e.core 0ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:13.771
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:13.806
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:13.810
+!MESSAGE Initializing JDT Language Server (Standard)
+	- Version: 1.58.0-SNAPSHOT (OSGi 1.58.0.202604151538)
+	- Git Commit: bb27b6d - Update release date
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.263
+!MESSAGE ProjectRegistryRefreshJob finished 651ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.301
+!MESSAGE Static Commands: []
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.302
+!MESSAGE Non-Static Commands: [java.project.import, java.project.changeImportedProjects, java.navigate.openTypeHierarchy, java.project.resolveStackTraceLocation, java.edit.handlePasteEvent, java.edit.stringFormatting, java.project.getSettings, java.project.resolveWorkspaceSymbol, java.project.upgradeGradle, java.project.createModuleInfo, java.vm.getAllInstalls, java.edit.organizeImports, java.project.refreshDiagnostics, java.project.removeFromSourcePath, java.project.listSourcePaths, java.project.updateSettings, java.project.getAll, java.reloadBundles, java.project.isTestFile, java.project.resolveText, java.project.getClasspaths, java.navigate.resolveTypeHierarchy, java.getTroubleshootingInfo, java.edit.smartSemicolonDetection, java.project.updateSourceAttachment, java.project.updateClassPaths, java.decompile, java.protobuf.generateSources, java.project.resolveSourceAttachment, java.project.updateJdk, java.project.addToSourcePath, java.completion.onDidSelect]
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.325
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.330
+!MESSAGE RepositoryRegistryUpdateJob finished 11ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.343
+!MESSAGE Importers: GradleProjectImporter, MavenProjectImporter, EclipseProjectImporter, InvisibleProjectImporter
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.347
+!MESSAGE Scan of file failed: java.nio.file.NoSuchFileException: C:\.lsp-workspace\java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.348
+!MESSAGE Scan of file failed: java.nio.file.NoSuchFileException: C:\.lsp-workspace\java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.349
+!MESSAGE Scan of file failed: java.nio.file.NoSuchFileException: C:\.lsp-workspace\java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.350
+!MESSAGE Workspace initialized in 31ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.358
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.373
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.374
+!MESSAGE >> registerWatchers'
+
+!ENTRY org.eclipse.jdt.ls.core 4 0 2026-05-17 12:55:14.432
+!MESSAGE Problem with codeComplete for file:///.lsp-workspace/java/file%3A///C%3A/web/backjoon/.lsp-workspace/java/src/Main.java
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <:> at index 27: C:/.lsp-workspace/java/file:/C:/web/backjoon/.lsp-workspace/java/src/Main.java
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:191)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:142)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:46)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsUriSupport.fromUri(WindowsUriSupport.java:165)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.getPath(WindowsFileSystemProvider.java:96)
+	at java.base/java.nio.file.Path.of(Path.java:201)
+	at java.base/java.nio.file.Paths.get(Paths.java:95)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.filePathFromURI(JLSFileSystem.java:56)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.getStore(JLSFileSystem.java:49)
+	at org.eclipse.core.internal.filesystem.InternalFileSystemCore.getStore(InternalFileSystemCore.java:131)
+	at org.eclipse.core.filesystem.EFS.getStore(EFS.java:479)
+	at org.eclipse.core.filesystem.URIUtil.equals(URIUtil.java:49)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocationNonCanonical(FileSystemResourceManager.java:138)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocation(FileSystemResourceManager.java:126)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allResourcesFor(FileSystemResourceManager.java:296)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:113)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:105)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.findResource(JDTUtils.java:1167)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:201)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:185)
+	at org.eclipse.jdt.ls.core.internal.handlers.CompletionHandler.completion(CompletionHandler.java:119)
+	at org.eclipse.jdt.ls.core.internal.handlers.JDTLanguageServer.completion(JDTLanguageServer.java:656)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.jdt.ls.core.internal.ParentProcessWatcher.lambda$1(ParentProcessWatcher.java:86)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:330)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:14.434
+!MESSAGE Completion request cancelled
+
+!ENTRY org.eclipse.jdt.ls.core 4 0 2026-05-17 12:55:15.838
+!MESSAGE Problem with codeComplete for file:///.lsp-workspace/java/file%3A///C%3A/web/backjoon/.lsp-workspace/java/src/Main.java
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <:> at index 27: C:/.lsp-workspace/java/file:/C:/web/backjoon/.lsp-workspace/java/src/Main.java
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:191)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:142)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:46)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsUriSupport.fromUri(WindowsUriSupport.java:165)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.getPath(WindowsFileSystemProvider.java:96)
+	at java.base/java.nio.file.Path.of(Path.java:201)
+	at java.base/java.nio.file.Paths.get(Paths.java:95)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.filePathFromURI(JLSFileSystem.java:56)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.getStore(JLSFileSystem.java:49)
+	at org.eclipse.core.internal.filesystem.InternalFileSystemCore.getStore(InternalFileSystemCore.java:131)
+	at org.eclipse.core.filesystem.EFS.getStore(EFS.java:479)
+	at org.eclipse.core.filesystem.URIUtil.equals(URIUtil.java:49)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocationNonCanonical(FileSystemResourceManager.java:138)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocation(FileSystemResourceManager.java:126)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allResourcesFor(FileSystemResourceManager.java:296)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:113)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:105)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.findResource(JDTUtils.java:1167)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:201)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:185)
+	at org.eclipse.jdt.ls.core.internal.handlers.CompletionHandler.completion(CompletionHandler.java:119)
+	at org.eclipse.jdt.ls.core.internal.handlers.JDTLanguageServer.completion(JDTLanguageServer.java:656)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.jdt.ls.core.internal.ParentProcessWatcher.lambda$1(ParentProcessWatcher.java:86)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:330)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:15.839
+!MESSAGE Completion request cancelled
+
+!ENTRY org.eclipse.jdt.ls.core 4 0 2026-05-17 12:55:17.853
+!MESSAGE Problem with codeComplete for file:///.lsp-workspace/java/file%3A///C%3A/web/backjoon/.lsp-workspace/java/src/Main.java
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <:> at index 27: C:/.lsp-workspace/java/file:/C:/web/backjoon/.lsp-workspace/java/src/Main.java
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:191)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:142)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:46)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsUriSupport.fromUri(WindowsUriSupport.java:165)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.getPath(WindowsFileSystemProvider.java:96)
+	at java.base/java.nio.file.Path.of(Path.java:201)
+	at java.base/java.nio.file.Paths.get(Paths.java:95)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.filePathFromURI(JLSFileSystem.java:56)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.getStore(JLSFileSystem.java:49)
+	at org.eclipse.core.internal.filesystem.InternalFileSystemCore.getStore(InternalFileSystemCore.java:131)
+	at org.eclipse.core.filesystem.EFS.getStore(EFS.java:479)
+	at org.eclipse.core.filesystem.URIUtil.equals(URIUtil.java:49)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocationNonCanonical(FileSystemResourceManager.java:138)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocation(FileSystemResourceManager.java:126)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allResourcesFor(FileSystemResourceManager.java:296)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:113)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:105)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.findResource(JDTUtils.java:1167)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:201)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:185)
+	at org.eclipse.jdt.ls.core.internal.handlers.CompletionHandler.completion(CompletionHandler.java:119)
+	at org.eclipse.jdt.ls.core.internal.handlers.JDTLanguageServer.completion(JDTLanguageServer.java:656)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.jdt.ls.core.internal.ParentProcessWatcher.lambda$1(ParentProcessWatcher.java:86)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:330)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:17.854
+!MESSAGE Completion request cancelled
+
+!ENTRY org.eclipse.jdt.ls.core 4 0 2026-05-17 12:55:18.730
+!MESSAGE Problem with codeComplete for file:///.lsp-workspace/java/file%3A///C%3A/web/backjoon/.lsp-workspace/java/src/Main.java
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <:> at index 27: C:/.lsp-workspace/java/file:/C:/web/backjoon/.lsp-workspace/java/src/Main.java
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:191)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:142)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:46)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsUriSupport.fromUri(WindowsUriSupport.java:165)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.getPath(WindowsFileSystemProvider.java:96)
+	at java.base/java.nio.file.Path.of(Path.java:201)
+	at java.base/java.nio.file.Paths.get(Paths.java:95)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.filePathFromURI(JLSFileSystem.java:56)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.getStore(JLSFileSystem.java:49)
+	at org.eclipse.core.internal.filesystem.InternalFileSystemCore.getStore(InternalFileSystemCore.java:131)
+	at org.eclipse.core.filesystem.EFS.getStore(EFS.java:479)
+	at org.eclipse.core.filesystem.URIUtil.equals(URIUtil.java:49)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocationNonCanonical(FileSystemResourceManager.java:138)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocation(FileSystemResourceManager.java:126)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allResourcesFor(FileSystemResourceManager.java:296)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:113)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:105)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.findResource(JDTUtils.java:1167)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:201)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:185)
+	at org.eclipse.jdt.ls.core.internal.handlers.CompletionHandler.completion(CompletionHandler.java:119)
+	at org.eclipse.jdt.ls.core.internal.handlers.JDTLanguageServer.completion(JDTLanguageServer.java:656)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.jdt.ls.core.internal.ParentProcessWatcher.lambda$1(ParentProcessWatcher.java:86)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:330)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:18.733
+!MESSAGE Completion request cancelled
+
+!ENTRY org.eclipse.jdt.ls.core 4 0 2026-05-17 12:55:22.406
+!MESSAGE Problem with codeComplete for file:///.lsp-workspace/java/file%3A///C%3A/web/backjoon/.lsp-workspace/java/src/Main.java
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <:> at index 27: C:/.lsp-workspace/java/file:/C:/web/backjoon/.lsp-workspace/java/src/Main.java
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:191)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:142)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:46)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsUriSupport.fromUri(WindowsUriSupport.java:165)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.getPath(WindowsFileSystemProvider.java:96)
+	at java.base/java.nio.file.Path.of(Path.java:201)
+	at java.base/java.nio.file.Paths.get(Paths.java:95)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.filePathFromURI(JLSFileSystem.java:56)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.getStore(JLSFileSystem.java:49)
+	at org.eclipse.core.internal.filesystem.InternalFileSystemCore.getStore(InternalFileSystemCore.java:131)
+	at org.eclipse.core.filesystem.EFS.getStore(EFS.java:479)
+	at org.eclipse.core.filesystem.URIUtil.equals(URIUtil.java:49)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocationNonCanonical(FileSystemResourceManager.java:138)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocation(FileSystemResourceManager.java:126)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allResourcesFor(FileSystemResourceManager.java:296)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:113)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:105)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.findResource(JDTUtils.java:1167)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:201)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:185)
+	at org.eclipse.jdt.ls.core.internal.handlers.CompletionHandler.completion(CompletionHandler.java:119)
+	at org.eclipse.jdt.ls.core.internal.handlers.JDTLanguageServer.completion(JDTLanguageServer.java:656)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.jdt.ls.core.internal.ParentProcessWatcher.lambda$1(ParentProcessWatcher.java:86)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:330)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:22.407
+!MESSAGE Completion request cancelled
+
+!ENTRY org.eclipse.jdt.ls.core 4 0 2026-05-17 12:55:23.352
+!MESSAGE Problem with codeComplete for file:///.lsp-workspace/java/file%3A///C%3A/web/backjoon/.lsp-workspace/java/src/Main.java
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <:> at index 27: C:/.lsp-workspace/java/file:/C:/web/backjoon/.lsp-workspace/java/src/Main.java
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:191)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:142)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:46)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsUriSupport.fromUri(WindowsUriSupport.java:165)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.getPath(WindowsFileSystemProvider.java:96)
+	at java.base/java.nio.file.Path.of(Path.java:201)
+	at java.base/java.nio.file.Paths.get(Paths.java:95)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.filePathFromURI(JLSFileSystem.java:56)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.getStore(JLSFileSystem.java:49)
+	at org.eclipse.core.internal.filesystem.InternalFileSystemCore.getStore(InternalFileSystemCore.java:131)
+	at org.eclipse.core.filesystem.EFS.getStore(EFS.java:479)
+	at org.eclipse.core.filesystem.URIUtil.equals(URIUtil.java:49)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocationNonCanonical(FileSystemResourceManager.java:138)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocation(FileSystemResourceManager.java:126)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allResourcesFor(FileSystemResourceManager.java:296)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:113)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:105)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.findResource(JDTUtils.java:1167)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:201)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:185)
+	at org.eclipse.jdt.ls.core.internal.handlers.CompletionHandler.completion(CompletionHandler.java:119)
+	at org.eclipse.jdt.ls.core.internal.handlers.JDTLanguageServer.completion(JDTLanguageServer.java:656)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.jdt.ls.core.internal.ParentProcessWatcher.lambda$1(ParentProcessWatcher.java:86)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:330)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:23.353
+!MESSAGE Completion request cancelled
+
+!ENTRY org.eclipse.jdt.ls.core 4 0 2026-05-17 12:55:23.520
+!MESSAGE Problem with codeComplete for file:///.lsp-workspace/java/file%3A///C%3A/web/backjoon/.lsp-workspace/java/src/Main.java
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <:> at index 27: C:/.lsp-workspace/java/file:/C:/web/backjoon/.lsp-workspace/java/src/Main.java
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:191)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:142)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:46)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsUriSupport.fromUri(WindowsUriSupport.java:165)
+	at java.base/sun.nio.fs.WindowsFileSystemProvider.getPath(WindowsFileSystemProvider.java:96)
+	at java.base/java.nio.file.Path.of(Path.java:201)
+	at java.base/java.nio.file.Paths.get(Paths.java:95)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.filePathFromURI(JLSFileSystem.java:56)
+	at org.eclipse.jdt.ls.core.internal.filesystem.JLSFileSystem.getStore(JLSFileSystem.java:49)
+	at org.eclipse.core.internal.filesystem.InternalFileSystemCore.getStore(InternalFileSystemCore.java:131)
+	at org.eclipse.core.filesystem.EFS.getStore(EFS.java:479)
+	at org.eclipse.core.filesystem.URIUtil.equals(URIUtil.java:49)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocationNonCanonical(FileSystemResourceManager.java:138)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allPathsForLocation(FileSystemResourceManager.java:126)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.allResourcesFor(FileSystemResourceManager.java:296)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:113)
+	at org.eclipse.core.internal.resources.WorkspaceRoot.findFilesForLocationURI(WorkspaceRoot.java:105)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.findResource(JDTUtils.java:1167)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:201)
+	at org.eclipse.jdt.ls.core.internal.JDTUtils.resolveCompilationUnit(JDTUtils.java:185)
+	at org.eclipse.jdt.ls.core.internal.handlers.CompletionHandler.completion(CompletionHandler.java:119)
+	at org.eclipse.jdt.ls.core.internal.handlers.JDTLanguageServer.completion(JDTLanguageServer.java:656)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.jdt.ls.core.internal.ParentProcessWatcher.lambda$1(ParentProcessWatcher.java:86)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:330)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2026-05-17 12:55:23.523
+!MESSAGE Completion request cancelled

@@ -1,0 +1,32 @@
+If:
+  PathMatch: .*\.(cpp|cc|cxx|hpp|h)$
+
+CompileFlags:
+  Add:
+    - -xc++
+    - -std=c++17
+    - -Wall
+    - -Wextra
+    - -O2
+    - -I.
+    - -isystem
+    - C:/msys64/ucrt64/include/c++/15.2.0
+    - -isystem
+    - C:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32
+    - -isystem
+    - C:/msys64/ucrt64/include
+
+Diagnostics:
+  ClangTidy:
+    Add:
+      - bugprone-*
+      - performance-*
+      - readability-*
+    Remove:
+      - readability-magic-numbers
+
+Completion:
+  AllScopes: Yes
+
+Index:
+  Background: Build
