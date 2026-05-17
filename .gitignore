@@ -6,6 +6,7 @@
 .pnp.*
 .yarn/*
 .env
+.lsp-workspace/
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
