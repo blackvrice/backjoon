@@ -79,14 +79,14 @@ type TodoItem = {
 };
 
 type RecentSubmission = {
-    id: number;
-    problemId: number;
+    id: string | number;
+    problemId: string | number;
     problemTitle: string;
-    status: SubmissionStatus;
     language: string;
-    submittedAt: string;
+    status: SubmissionStatus;
     time: string;
     memory: string;
+    submittedAt: string;
 };
 
 type RecommendedProblem = {

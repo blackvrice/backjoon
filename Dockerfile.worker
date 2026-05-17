@@ -1,0 +1,18 @@
+FROM node:22-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache docker-cli
+
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+COPY . .
+
+ENV DATABASE_URL=postgresql://backjoon:backjoon1234@postgres:5432/backjoon?schema=public
+ENV DOCKER_HOST=unix:///var/run/docker.sock
+ENV DOCKER_BIN=/usr/bin/docker
+
+RUN npx prisma generate
+
+CMD ["npm", "run", "judge"]

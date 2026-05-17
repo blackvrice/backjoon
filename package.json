@@ -8,8 +8,11 @@
     "dev:all": "concurrently \"npm run dev\" \"npm run lsp\" \"npm run judge\"",
     "build": "next build",
     "start": "next start",
+    "start:prod": "node .next/standalone/server.js",
     "lint": "eslint",
-    "judge": "tsx server/judge/judgeWorker.ts"
+    "judge": "tsx server/judge/judgeWorker.ts",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate deploy"
   },
   "type": "module",
   "dependencies": {

@@ -44,6 +44,7 @@ import {
     Target,
     Timer
 } from "lucide-react";
+import { toSubmissionStatus } from "@/components/domain/SubmissionStatusBadge";
 
 type ProblemCategory = string;
 type DetailTab = "description" | "examples" | "submissions" | "related";

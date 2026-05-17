@@ -56,6 +56,7 @@ import {
     Timer,
     XCircle
 } from "lucide-react";
+import { toSubmissionStatus } from "@/components/domain/SubmissionStatusBadge";
 
 type ProblemCategory = string;
 

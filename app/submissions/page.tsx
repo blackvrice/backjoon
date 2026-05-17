@@ -52,6 +52,7 @@ import {
     Trophy,
     XCircle
 } from "lucide-react";
+import { toSubmissionStatus } from "@/components/domain/SubmissionStatusBadge";
 
 type StatusFilter =
     | "전체"

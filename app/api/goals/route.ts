@@ -24,17 +24,21 @@ export async function GET() {
             current: goal.current,
             target: goal.target,
             unit: goal.unit,
-            startAt: goal.startAt.toISOString(),
-            startAtText: formatDate(goal.startAt),
-            dueAt: goal.deadlineAt.toISOString(),
-            dueAtText: formatDate(goal.deadlineAt),
+
+            startAt: goal.startedAt.toISOString(),
+            startAtText: formatDate(goal.startedAt),
+
+            dueAt: goal.deadlineAt ? goal.deadlineAt.toISOString() : null,
+            dueAtText: goal.deadlineAt ? formatDate(goal.deadlineAt) : "미정",
+
             createdAt: goal.createdAt.toISOString(),
             createdAtText: formatDate(goal.createdAt),
             updatedAt: goal.updatedAt.toISOString(),
             updatedAtText: formatDate(goal.updatedAt),
-            href: goal.href || "/goals",
+
+            href: "/goals",
             tags: goal.tags,
-            memo: goal.memo || "",
+            memo: "",
         })),
     });
 }

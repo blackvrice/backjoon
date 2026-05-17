@@ -366,8 +366,9 @@ function buildTodoItems(args: {
     weakTags: Awaited<ReturnType<typeof getWeakTags>>;
 }) {
     const items: any[] = [];
-    const wrongSubmission = args.recentSubmissions.find((submission) => submission.status === "wrong" || submission.status === "compile" || submission.status === "runtime");
-
+    const wrongSubmission = args.recentSubmissions.find(
+    (submission: { status: string }) => submission.status === "wrong"
+    );
     if (wrongSubmission) {
         items.push({
             id: `retry-${wrongSubmission.id}`,

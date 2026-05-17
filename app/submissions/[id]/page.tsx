@@ -47,6 +47,7 @@ import {
     XCircle,
     Zap
 } from "lucide-react";
+import { toSubmissionStatus } from "@/components/domain/SubmissionStatusBadge";
 
 type Language =
     | "C++17"
