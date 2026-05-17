@@ -1,0 +1,13 @@
+analyzer:
+  language:
+    strict-casts: false
+    strict-inference: false
+    strict-raw-types: false
+  exclude:
+    - build/**
+    - .dart_tool/**
+
+linter:
+  rules:
+    - prefer_final_locals
+    - avoid_print: false

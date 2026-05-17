@@ -1,0 +1,13 @@
+If:
+  PathMatch: .*\.(cpp|cc|cxx|hpp|h)$
+
+CompileFlags:
+  Add:
+    - -xc++
+    - -std=c++17
+
+Completion:
+  AllScopes: Yes
+
+Index:
+  Background: Build

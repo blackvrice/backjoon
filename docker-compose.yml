@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres
+    container_name: backjoon-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: backjoon
+      POSTGRES_PASSWORD: backjoon1234
+      POSTGRES_DB: backjoon
+    ports:
+      - "5432:5432"
+    volumes:
+      - backjoon_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  backjoon_postgres_data:

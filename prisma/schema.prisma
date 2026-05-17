@@ -1,0 +1,324 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                Int          @id @default(autoincrement())
+  handle            String       @unique
+  email             String       @unique
+  passwordHash      String?
+  name              String?
+  avatarUrl         String?
+  role              String       @default("user")
+  status            String       @default("active")
+  verification      String       @default("verified")
+  risk              String       @default("low")
+  score             Int          @default(0)
+  rank              Int          @default(0)
+  solvedCount       Int          @default(0)
+  notesCount        Int          @default(0)
+  favoritesCount    Int          @default(0)
+  testsTaken        Int          @default(0)
+  repeatedCodeCount Int          @default(0)
+  failedRate        Int          @default(0)
+  ip                String       @default("127.0.0.1")
+  memo              String       @default("")
+  tags              String[]     @default([])
+  lastActiveAt      DateTime?
+
+  submissions       Submission[]
+  notes             Note[]
+  goals             Goal[]
+  favorites         Favorite[]
+  testAttempts      TestAttempt[]
+  adminLogs         AdminLog[]
+
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  @@index([status])
+  @@index([role])
+  @@index([score])
+}
+
+model Problem {
+  id                Int          @id @default(autoincrement())
+  number            Int          @unique
+  slug              String       @unique
+  title             String
+  description       String       @default("")
+  inputDescription  String       @default("")
+  outputDescription String       @default("")
+  constraints       String[]     @default([])
+  hints             String[]     @default([])
+  difficulty        String       @default("Easy")
+  category          String       @default("구현")
+  score             Int          @default(100)
+  source            String       @default("Local")
+  status            String       @default("published")
+  timeLimitMs       Int          @default(2000)
+  memoryLimitMb     Int          @default(256)
+  compareMode       String       @default("default")
+  tags              String[]     @default([])
+  note              String       @default("")
+  memo              String       @default("")
+  recommendedOrder  Int          @default(0)
+  solvedRate        Float        @default(0)
+  authorEmail       String       @default("admin@local")
+  reviewerEmail     String?
+  reviewMessage     String?
+  publishedAt       DateTime?
+
+  testCases         TestCase[]
+  submissions       Submission[]
+  setItems          ProblemSetItem[]
+  testItems         StudyTestProblem[]
+  notes             Note[]
+  favorites         Favorite[]
+
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  @@index([status])
+  @@index([difficulty])
+  @@index([category])
+}
+
+model TestCase {
+  id          Int       @id @default(autoincrement())
+  problemId   Int
+  input       String    @default("")
+  output      String    @default("")
+  explanation String?
+  isSample    Boolean   @default(false)
+  isHidden    Boolean   @default(false)
+  isVerified  Boolean   @default(true)
+
+  problem     Problem   @relation(fields: [problemId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([problemId])
+}
+
+model Submission {
+  id              Int       @id @default(autoincrement())
+  problemId       Int
+  userId          Int?
+  language        String
+  sourceFile      String    @default("Main.cpp")
+  code            String
+  status          String    @default("pending")
+  resultMessage   String?
+  executionTimeMs Int?
+  memoryKb        Int?
+  judgedAt        DateTime?
+  workerId        String?
+  queueJobId      String?   @unique
+  retryCount      Int       @default(0)
+  testPassed      Int       @default(0)
+  testTotal       Int       @default(0)
+  ip              String    @default("127.0.0.1")
+
+  problem         Problem   @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  user            User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([status, createdAt])
+  @@index([problemId])
+  @@index([userId])
+  @@index([language])
+}
+
+model AdminLog {
+  id          String    @id
+  level       String    @default("info")
+  source      String    @default("system")
+  status      String    @default("open")
+  title       String
+  message     String
+  detail      String    @default("")
+  stack       String?
+  requestId   String?
+  path        String?
+  method      String?
+  worker      String?
+  count       Int       @default(1)
+  tags        String[]  @default([])
+  relatedHref String    @default("/admin/logs")
+  actionHref  String?
+  userId      Int?
+  user        User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([level, status])
+  @@index([source])
+}
+
+model Note {
+  id           Int       @id @default(autoincrement())
+  userId       Int?
+  problemId    Int?
+  title        String
+  type         String    @default("wrong-answer")
+  status       String    @default("active")
+  reviewLevel  String    @default("medium")
+  difficulty   String    @default("Easy")
+  content      String    @default("")
+  summary      String    @default("")
+  tags         String[]  @default([])
+  priority     Int       @default(2)
+  nextReviewAt DateTime?
+
+  user         User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  problem      Problem?  @relation(fields: [problemId], references: [id], onDelete: SetNull)
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([problemId])
+  @@index([status])
+}
+
+model Goal {
+  id          Int       @id @default(autoincrement())
+  userId      Int?
+  title       String
+  type        String    @default("problems")
+  status      String    @default("active")
+  period      String    @default("weekly")
+  priority    Int       @default(2)
+  target      Int       @default(1)
+  current     Int       @default(0)
+  unit        String    @default("문제")
+  description String    @default("")
+  tags        String[]  @default([])
+  startedAt   DateTime  @default(now())
+  deadlineAt  DateTime?
+
+  user        User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([status])
+}
+
+model Favorite {
+  id          Int       @id @default(autoincrement())
+  userId      Int?
+  problemId   Int?
+  type        String    @default("problem")
+  title       String
+  status      String    @default("active")
+  difficulty  String    @default("Easy")
+  priority    Int       @default(2)
+  progress    Int       @default(0)
+  href        String    @default("/")
+  memo        String    @default("")
+  tags        String[]  @default([])
+
+  user        User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  problem     Problem?  @relation(fields: [problemId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([problemId])
+  @@index([type])
+}
+
+model ProblemSet {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  title       String
+  description String    @default("")
+  category    String    @default("추천")
+  difficulty  String    @default("Easy")
+  status      String    @default("active")
+  progress    Int       @default(0)
+  tags        String[]  @default([])
+  items       ProblemSetItem[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model ProblemSetItem {
+  id        Int        @id @default(autoincrement())
+  setId     Int
+  problemId Int
+  order     Int        @default(0)
+
+  set       ProblemSet @relation(fields: [setId], references: [id], onDelete: Cascade)
+  problem   Problem    @relation(fields: [problemId], references: [id], onDelete: Cascade)
+
+  @@unique([setId, problemId])
+  @@index([problemId])
+}
+
+model StudyTest {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  title       String
+  description String    @default("")
+  type        String    @default("mock")
+  status      String    @default("ready")
+  durationMin Int       @default(120)
+  difficulty  String    @default("Medium")
+  tags        String[]  @default([])
+  items       StudyTestProblem[]
+  attempts    TestAttempt[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model StudyTestProblem {
+  id        Int       @id @default(autoincrement())
+  testId    Int
+  problemId Int
+  order     Int       @default(0)
+  score     Int       @default(100)
+
+  test      StudyTest @relation(fields: [testId], references: [id], onDelete: Cascade)
+  problem   Problem   @relation(fields: [problemId], references: [id], onDelete: Cascade)
+
+  @@unique([testId, problemId])
+  @@index([problemId])
+}
+
+model TestAttempt {
+  id          Int       @id @default(autoincrement())
+  testId      Int
+  userId      Int?
+  status      String    @default("finished")
+  score       Int       @default(0)
+  totalScore  Int       @default(0)
+  solved      Int       @default(0)
+  total       Int       @default(0)
+  durationMin Int       @default(0)
+  summary     String    @default("")
+
+  test        StudyTest @relation(fields: [testId], references: [id], onDelete: Cascade)
+  user        User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([testId])
+  @@index([userId])
+}

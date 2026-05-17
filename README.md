@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Backjoon DB Pages Complete
 
-## Getting Started
+관리자 화면을 샘플 배열 방식에서 PostgreSQL + Prisma API 방식으로 변경한 완성본입니다.
 
-First, run the development server:
+## 포함 파일
+
+- `src/app/admin/page.tsx`
+- `src/app/admin/problems/page.tsx`
+- `src/app/admin/submissions/page.tsx`
+- `src/app/admin/logs/page.tsx`
+- `src/app/admin/users/page.tsx`
+- `src/app/api/admin/summary/route.ts`
+- `src/app/api/admin/problems/route.ts`
+- `src/app/api/admin/submissions/route.ts`
+- `src/app/api/admin/logs/route.ts`
+- `src/app/api/admin/users/route.ts`
+- `src/lib/prisma.ts`
+- `prisma/schema.prisma`
+- `prisma/seed.ts`
+- `prisma.config.ts`
+- `docker-compose.yml`
+- `.env.example`
+
+## 필요한 패키지
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm i @prisma/adapter-pg pg dotenv
+npm i -D prisma
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 실행 순서
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+copy .env.example .env
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+docker compose up -d
 
-## Learn More
+npx prisma migrate dev --name init
+npx prisma generate
+npx prisma db seed
 
-To learn more about Next.js, take a look at the following resources:
+npm run dev:all
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 주의
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+기존 `prisma/schema.prisma`가 있다면 덮어쓰기 전에 백업하세요.
+`judgeWorker.ts`가 참조하는 `Problem`, `TestCase`, `Submission` 필드는 유지되어 있습니다.

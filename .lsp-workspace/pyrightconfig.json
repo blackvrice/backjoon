@@ -1,0 +1,15 @@
+{
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": "warning",
+  "reportMissingTypeStubs": false,
+  "exclude": [
+    "**/__pycache__",
+    "**/.venv",
+    "**/node_modules",
+    "**/bin",
+    "**/obj"
+  ],
+  "venvPath": ".",
+  "venv": ".venv"
+}
