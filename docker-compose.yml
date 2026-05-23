@@ -4,15 +4,15 @@ services:
     container_name: backjoon-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: backjoon
-      POSTGRES_PASSWORD: backjoon1234
-      POSTGRES_DB: backjoon
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER in .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:?Set POSTGRES_DB in .env}
     ports:
       - "5432:5432"
     volumes:
       - backjoon_postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U backjoon -d backjoon"]
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -29,7 +29,7 @@ services:
         condition: service_healthy
     environment:
       NODE_ENV: production
-      DATABASE_URL: postgresql://backjoon:backjoon1234@postgres:5432/backjoon?schema=public
+      DATABASE_URL: postgresql://${POSTGRES_USER:?Set POSTGRES_USER in .env}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/${POSTGRES_DB:?Set POSTGRES_DB in .env}?schema=public
       JUDGE_RUNNER_URL: http://judge-api:4002/run
     ports:
       - "3000:3000"
@@ -47,7 +47,7 @@ services:
         condition: service_healthy
     environment:
       NODE_ENV: production
-      DATABASE_URL: postgresql://backjoon:backjoon1234@postgres:5432/backjoon?schema=public
+      DATABASE_URL: postgresql://${POSTGRES_USER:?Set POSTGRES_USER in .env}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/${POSTGRES_DB:?Set POSTGRES_DB in .env}?schema=public
       DOCKER_HOST: unix:///var/run/docker.sock
       DOCKER_BIN: /usr/bin/docker
       JUDGE_WORKSPACE_VOLUME: backjoon_judge_workspaces

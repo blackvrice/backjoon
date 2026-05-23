@@ -245,29 +245,27 @@ const tierVariant = {
     Diamond: "blue"
 } as const;
 
-function getTierCount(tier: Tier) {
-    return rankingUsers.filter((user) => user.tier === tier).length;
+function getTierCount(users: RankingUser[], tier: Tier) {
+    return users.filter((user) => user.tier === tier).length;
 }
 
-function getCurrentUser() {
-    return rankingUsers.find((user) => user.isCurrentUser) ?? rankingUsers[0] ?? null;
+function getCurrentUser(users: RankingUser[]) {
+    return users.find((user) => user.isCurrentUser) ?? null;
 }
 
-function getRankIcon(rank: number) {
-    if (rank === 1) return Crown;
-    if (rank <= 3) return Medal;
-    return Trophy;
+function RankIcon({ rank, className }: { rank: number; className?: string }) {
+    if (rank === 1) return <Crown className={className} />;
+    if (rank <= 3) return <Medal className={className} />;
+    return <Trophy className={className} />;
 }
 
 function TopRankerCard({ user }: { user: RankingUser }) {
-    const RankIcon = getRankIcon(user.rank);
-
     return (
         <Link href={`/profile/${user.handle}`} className="block rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md">
             <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-4">
                     <div className={`flex h-16 w-16 items-center justify-center rounded-[1.5rem] text-white ${user.rank === 1 ? "bg-amber-500" : user.rank === 2 ? "bg-slate-500" : "bg-orange-500"}`}>
-                        <RankIcon className="h-8 w-8" />
+                        <RankIcon rank={user.rank} className="h-8 w-8" />
                     </div>
                     <div>
                         <div className="mb-2 flex flex-wrap gap-2">
@@ -313,13 +311,11 @@ function RankingTable({ users }: { users: RankingUser[] }) {
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                     {users.map((user) => {
-                        const RankIcon = getRankIcon(user.rank);
-
                         return (
                             <tr key={user.handle} className={`transition hover:bg-slate-50 ${user.isCurrentUser ? "bg-blue-50/50" : ""}`}>
                                 <td className="px-5 py-4">
                                     <div className="flex items-center gap-2 font-black text-slate-950">
-                                        <RankIcon className={`h-4 w-4 ${user.rank === 1 ? "text-amber-500" : user.rank <= 3 ? "text-slate-500" : "text-slate-300"}`} />
+                                        <RankIcon rank={user.rank} className={`h-4 w-4 ${user.rank === 1 ? "text-amber-500" : user.rank <= 3 ? "text-slate-500" : "text-slate-300"}`} />
                                         #{user.rank}
                                     </div>
                                 </td>
@@ -399,14 +395,14 @@ function MetricBox({ label, value }: { label: string; value: string }) {
     );
 }
 
-function TierDistributionPanel() {
-    const total = rankingUsers.length;
+function TierDistributionPanel({ users }: { users: RankingUser[] }) {
+    const total = users.length;
 
     return (
         <SidePanel title="티어 분포" badge={<ShieldCheck className="h-5 w-5 text-blue-600" />}>
             <div className="space-y-4">
                 {(["Diamond", "Platinum", "Gold", "Silver", "Bronze"] as Tier[]).map((tier) => {
-                    const count = getTierCount(tier);
+                    const count = getTierCount(users, tier);
                     const percent = Math.round((count / Math.max(total, 1)) * 100);
 
                     return (
@@ -528,10 +524,10 @@ export default function RankingPage() {
                     return a.rank - b.rank;
             }
         });
-    }, [keyword, tier, language, sort]);
+    }, [rankingUsers, keyword, tier, language, sort]);
 
     const topUsers = rankingUsers.slice(0, 3);
-    const currentUser = getCurrentUser();
+    const currentUser = getCurrentUser(rankingUsers);
     const totalSolved = rankingUsers.reduce((sum, user) => sum + user.solved, 0);
     const averageAccuracy = Math.round((rankingUsers.reduce((sum, user) => sum + user.accuracy, 0) / rankingUsers.length) * 10) / 10;
     const maxStreak = Math.max(...rankingUsers.map((user) => user.streakDays));
@@ -643,7 +639,7 @@ export default function RankingPage() {
                             </SidePanel>
                         ) : null}
 
-                        <TierDistributionPanel />
+                        <TierDistributionPanel users={rankingUsers} />
 
                         <SidePanel title="추천 행동" badge={<Sparkles className="h-5 w-5 text-blue-600" />}>
                             <div className="space-y-2">

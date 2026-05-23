@@ -402,6 +402,7 @@ export type UserWhereInput = {
   favorites?: Prisma.FavoriteListRelationFilter
   testAttempts?: Prisma.TestAttemptListRelationFilter
   adminLogs?: Prisma.AdminLogListRelationFilter
+  sessions?: Prisma.AuthSessionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -435,6 +436,7 @@ export type UserOrderByWithRelationInput = {
   favorites?: Prisma.FavoriteOrderByRelationAggregateInput
   testAttempts?: Prisma.TestAttemptOrderByRelationAggregateInput
   adminLogs?: Prisma.AdminLogOrderByRelationAggregateInput
+  sessions?: Prisma.AuthSessionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -471,6 +473,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   favorites?: Prisma.FavoriteListRelationFilter
   testAttempts?: Prisma.TestAttemptListRelationFilter
   adminLogs?: Prisma.AdminLogListRelationFilter
+  sessions?: Prisma.AuthSessionListRelationFilter
 }, "id" | "handle" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -565,6 +568,7 @@ export type UserCreateInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -598,6 +602,7 @@ export type UserUncheckedCreateInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptUncheckedCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -630,6 +635,7 @@ export type UserUpdateInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -663,6 +669,7 @@ export type UserUncheckedUpdateInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUncheckedUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -856,6 +863,11 @@ export type UserSumOrderByAggregateInput = {
   failedRate?: Prisma.SortOrder
 }
 
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
+}
+
 export type UserNullableScalarRelationFilter = {
   is?: Prisma.UserWhereInput | null
   isNot?: Prisma.UserWhereInput | null
@@ -892,6 +904,20 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type UserCreateNestedOneWithoutSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
+  upsert?: Prisma.UserUpsertWithoutSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
 export type UserCreateNestedOneWithoutSubmissionsInput = {
@@ -990,6 +1016,152 @@ export type UserUpdateOneWithoutTestAttemptsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTestAttemptsInput, Prisma.UserUpdateWithoutTestAttemptsInput>, Prisma.UserUncheckedUpdateWithoutTestAttemptsInput>
 }
 
+export type UserCreateWithoutSessionsInput = {
+  handle: string
+  email: string
+  passwordHash?: string | null
+  name?: string | null
+  avatarUrl?: string | null
+  role?: string
+  status?: string
+  verification?: string
+  risk?: string
+  score?: number
+  rank?: number
+  solvedCount?: number
+  notesCount?: number
+  favoritesCount?: number
+  testsTaken?: number
+  repeatedCodeCount?: number
+  failedRate?: number
+  ip?: string
+  memo?: string
+  tags?: Prisma.UserCreatetagsInput | string[]
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  testAttempts?: Prisma.TestAttemptCreateNestedManyWithoutUserInput
+  adminLogs?: Prisma.AdminLogCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSessionsInput = {
+  id?: number
+  handle: string
+  email: string
+  passwordHash?: string | null
+  name?: string | null
+  avatarUrl?: string | null
+  role?: string
+  status?: string
+  verification?: string
+  risk?: string
+  score?: number
+  rank?: number
+  solvedCount?: number
+  notesCount?: number
+  favoritesCount?: number
+  testsTaken?: number
+  repeatedCodeCount?: number
+  failedRate?: number
+  ip?: string
+  memo?: string
+  tags?: Prisma.UserCreatetagsInput | string[]
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  testAttempts?: Prisma.TestAttemptUncheckedCreateNestedManyWithoutUserInput
+  adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+}
+
+export type UserUpsertWithoutSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSessionsInput, Prisma.UserUncheckedUpdateWithoutSessionsInput>
+}
+
+export type UserUpdateWithoutSessionsInput = {
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  verification?: Prisma.StringFieldUpdateOperationsInput | string
+  risk?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.IntFieldUpdateOperationsInput | number
+  rank?: Prisma.IntFieldUpdateOperationsInput | number
+  solvedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  notesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  favoritesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  testsTaken?: Prisma.IntFieldUpdateOperationsInput | number
+  repeatedCodeCount?: Prisma.IntFieldUpdateOperationsInput | number
+  failedRate?: Prisma.IntFieldUpdateOperationsInput | number
+  ip?: Prisma.StringFieldUpdateOperationsInput | string
+  memo?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.UserUpdatetagsInput | string[]
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submissions?: Prisma.SubmissionUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  testAttempts?: Prisma.TestAttemptUpdateManyWithoutUserNestedInput
+  adminLogs?: Prisma.AdminLogUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSessionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  verification?: Prisma.StringFieldUpdateOperationsInput | string
+  risk?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.IntFieldUpdateOperationsInput | number
+  rank?: Prisma.IntFieldUpdateOperationsInput | number
+  solvedCount?: Prisma.IntFieldUpdateOperationsInput | number
+  notesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  favoritesCount?: Prisma.IntFieldUpdateOperationsInput | number
+  testsTaken?: Prisma.IntFieldUpdateOperationsInput | number
+  repeatedCodeCount?: Prisma.IntFieldUpdateOperationsInput | number
+  failedRate?: Prisma.IntFieldUpdateOperationsInput | number
+  ip?: Prisma.StringFieldUpdateOperationsInput | string
+  memo?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.UserUpdatetagsInput | string[]
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  testAttempts?: Prisma.TestAttemptUncheckedUpdateManyWithoutUserNestedInput
+  adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutSubmissionsInput = {
   handle: string
   email: string
@@ -1019,6 +1191,7 @@ export type UserCreateWithoutSubmissionsInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubmissionsInput = {
@@ -1051,6 +1224,7 @@ export type UserUncheckedCreateWithoutSubmissionsInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptUncheckedCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubmissionsInput = {
@@ -1098,6 +1272,7 @@ export type UserUpdateWithoutSubmissionsInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubmissionsInput = {
@@ -1130,6 +1305,7 @@ export type UserUncheckedUpdateWithoutSubmissionsInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUncheckedUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAdminLogsInput = {
@@ -1161,6 +1337,7 @@ export type UserCreateWithoutAdminLogsInput = {
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAdminLogsInput = {
@@ -1193,6 +1370,7 @@ export type UserUncheckedCreateWithoutAdminLogsInput = {
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAdminLogsInput = {
@@ -1240,6 +1418,7 @@ export type UserUpdateWithoutAdminLogsInput = {
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAdminLogsInput = {
@@ -1272,6 +1451,7 @@ export type UserUncheckedUpdateWithoutAdminLogsInput = {
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotesInput = {
@@ -1303,6 +1483,7 @@ export type UserCreateWithoutNotesInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotesInput = {
@@ -1335,6 +1516,7 @@ export type UserUncheckedCreateWithoutNotesInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptUncheckedCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotesInput = {
@@ -1382,6 +1564,7 @@ export type UserUpdateWithoutNotesInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesInput = {
@@ -1414,6 +1597,7 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUncheckedUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutGoalsInput = {
@@ -1445,6 +1629,7 @@ export type UserCreateWithoutGoalsInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutGoalsInput = {
@@ -1477,6 +1662,7 @@ export type UserUncheckedCreateWithoutGoalsInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptUncheckedCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutGoalsInput = {
@@ -1524,6 +1710,7 @@ export type UserUpdateWithoutGoalsInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGoalsInput = {
@@ -1556,6 +1743,7 @@ export type UserUncheckedUpdateWithoutGoalsInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUncheckedUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFavoritesInput = {
@@ -1587,6 +1775,7 @@ export type UserCreateWithoutFavoritesInput = {
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -1619,6 +1808,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
   testAttempts?: Prisma.TestAttemptUncheckedCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -1666,6 +1856,7 @@ export type UserUpdateWithoutFavoritesInput = {
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -1698,6 +1889,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
   testAttempts?: Prisma.TestAttemptUncheckedUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTestAttemptsInput = {
@@ -1729,6 +1921,7 @@ export type UserCreateWithoutTestAttemptsInput = {
   goals?: Prisma.GoalCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTestAttemptsInput = {
@@ -1761,6 +1954,7 @@ export type UserUncheckedCreateWithoutTestAttemptsInput = {
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.AuthSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTestAttemptsInput = {
@@ -1808,6 +2002,7 @@ export type UserUpdateWithoutTestAttemptsInput = {
   goals?: Prisma.GoalUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTestAttemptsInput = {
@@ -1840,6 +2035,7 @@ export type UserUncheckedUpdateWithoutTestAttemptsInput = {
   goals?: Prisma.GoalUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.AuthSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1854,6 +2050,7 @@ export type UserCountOutputType = {
   favorites: number
   testAttempts: number
   adminLogs: number
+  sessions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1863,6 +2060,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   favorites?: boolean | UserCountOutputTypeCountFavoritesArgs
   testAttempts?: boolean | UserCountOutputTypeCountTestAttemptsArgs
   adminLogs?: boolean | UserCountOutputTypeCountAdminLogsArgs
+  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
 }
 
 /**
@@ -1917,6 +2115,13 @@ export type UserCountOutputTypeCountAdminLogsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.AdminLogWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuthSessionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1949,6 +2154,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
   testAttempts?: boolean | Prisma.User$testAttemptsArgs<ExtArgs>
   adminLogs?: boolean | Prisma.User$adminLogsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2041,6 +2247,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
   testAttempts?: boolean | Prisma.User$testAttemptsArgs<ExtArgs>
   adminLogs?: boolean | Prisma.User$adminLogsArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2055,6 +2262,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     favorites: Prisma.$FavoritePayload<ExtArgs>[]
     testAttempts: Prisma.$TestAttemptPayload<ExtArgs>[]
     adminLogs: Prisma.$AdminLogPayload<ExtArgs>[]
+    sessions: Prisma.$AuthSessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2481,6 +2689,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   favorites<T extends Prisma.User$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   testAttempts<T extends Prisma.User$testAttemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$testAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TestAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   adminLogs<T extends Prisma.User$adminLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$adminLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3068,6 +3277,30 @@ export type User$adminLogsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.AdminLogScalarFieldEnum | Prisma.AdminLogScalarFieldEnum[]
+}
+
+/**
+ * User.sessions
+ */
+export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuthSession
+   */
+  select?: Prisma.AuthSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuthSession
+   */
+  omit?: Prisma.AuthSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuthSessionInclude<ExtArgs> | null
+  where?: Prisma.AuthSessionWhereInput
+  orderBy?: Prisma.AuthSessionOrderByWithRelationInput | Prisma.AuthSessionOrderByWithRelationInput[]
+  cursor?: Prisma.AuthSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuthSessionScalarFieldEnum | Prisma.AuthSessionScalarFieldEnum[]
 }
 
 /**

@@ -4,7 +4,7 @@ WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Prisma / Next build 단계에서 필요
-ENV DATABASE_URL="postgresql://backjoon:backjoon1234@postgres:5432/backjoon"
+ENV DATABASE_URL="postgresql://user:password@localhost:5432/database?schema=public"
 
 FROM base AS deps
 COPY package.json package-lock.json* ./
@@ -25,7 +25,6 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
-ENV DATABASE_URL="postgresql://backjoon:backjoon1234@postgres:5432/backjoon"
 
 RUN addgroup -S nodejs
 RUN adduser -S nextjs -G nodejs

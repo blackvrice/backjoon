@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { acceptedRate, formatDate, formatMemoryKb, formatMemoryLimit, formatTimeLimit, toDifficulty } from "@/lib/api-format";
+import { createAuthSession, setAuthCookie } from "@/lib/auth";
 
 
 export const runtime = "nodejs";
@@ -23,5 +23,7 @@ export async function POST(request: NextRequest) {
         handle = `${handleBase}${suffix}`;
     }
     const user = await prisma.user.create({ data: { email, handle, name, role: "user", status: "active", verification: "verified", lastActiveAt: new Date(), ip: request.headers.get("x-forwarded-for") ?? "127.0.0.1" } });
+    const session = await createAuthSession(user.id);
+    await setAuthCookie(session.id, session.expiresAt);
     return NextResponse.json({ ok: true, user: { id: user.id, handle: user.handle, email: user.email, name: user.name } }, { status: 201 });
 }

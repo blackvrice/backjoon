@@ -37,7 +37,6 @@ import {
     type ProblemStatus
 } from "@/components/domain";
 import {
-    AlertTriangle,
     ArrowLeft,
     ArrowRight,
     BarChart3,
@@ -47,26 +46,21 @@ import {
     ChevronRight,
     Clock3,
     Code2,
-    Database,
     FileText,
     Flame,
     Gauge,
     Layers3,
     Lightbulb,
     ListChecks,
-    Medal,
     NotebookPen,
     Play,
     RotateCcw,
     Search,
     ShieldCheck,
-    Sparkles,
-    Star,
     Target,
     Terminal,
     Timer,
     Trophy,
-    UsersRound,
     Zap
 } from "lucide-react";
 
@@ -119,326 +113,6 @@ type TestDetail = {
     problems: TestProblem[];
 };
 
-const TESTS: TestDetail[] = [
-    {
-        id: "coding-test-practice-1",
-        title: "실전 코딩테스트 1회차",
-        description: "구현, 자료구조, 탐색, DP를 섞어 제한 시간 안에 푸는 실전형 모의 테스트입니다.",
-        category: "종합",
-        difficulty: "Medium",
-        status: "open",
-        recommended: true,
-        featured: true,
-        totalScore: 500,
-        myScore: 210,
-        durationMinutes: 120,
-        participants: 128,
-        averageScore: 248,
-        rank: 42,
-        startAt: "2026-05-03T09:00:00",
-        startAtText: "2026.05.03 09:00",
-        endAt: "2026-05-10T23:59:00",
-        endAtText: "2026.05.10 23:59",
-        updatedAt: "2026-05-03",
-        tags: ["구현", "BFS", "DP", "자료구조"],
-        companies: ["공통", "신입", "주니어"],
-        rules: [
-            "제한 시간은 120분이며, 테스트 시작 후 중단해도 시간이 계속 흐릅니다.",
-            "문제별 부분 점수는 없으며, 각 문제는 모든 테스트 케이스를 통과해야 점수가 반영됩니다.",
-            "제출 횟수 제한은 없지만, 마지막 정답 제출 기준으로 점수가 확정됩니다.",
-            "실제 시험 모드에서는 외부 검색과 복사 붙여넣기 제한을 옵션으로 둘 수 있습니다."
-        ],
-        guide: [
-            "먼저 모든 문제를 훑고 쉬운 구현 문제부터 해결하세요.",
-            "BFS 문제는 방문 처리 시점을 큐에 넣는 순간으로 통일하세요.",
-            "DP 문제는 점화식보다 상태 정의를 먼저 작성하세요.",
-            "남은 20분에는 오답 문제보다 아직 시도하지 않은 쉬운 문제를 우선하세요."
-        ],
-        analysis: [
-            { title: "현재 점수", description: "획득한 점수입니다.", value: "210 / 500", tone: "blue" },
-            { title: "평균 대비", description: "현재 평균보다 낮습니다.", value: "-38점", tone: "orange" },
-            { title: "약점 태그", description: "오답이 많이 발생한 태그입니다.", value: "DP", tone: "red" },
-            { title: "추천 행동", description: "BFS 문제를 먼저 마무리하세요.", value: "토마토", tone: "green" }
-        ],
-        problems: [
-            {
-                order: 1,
-                id: 1000,
-                title: "두 수의 합",
-                difficulty: "Easy",
-                category: "구현",
-                score: 100,
-                points: 80,
-                status: "solved",
-                solvedRate: 69.5,
-                submissions: 184,
-                timeLimit: "1초",
-                memoryLimit: "256MB",
-                tags: ["implementation", "math", "입출력"],
-                memo: "기본 입출력과 사칙연산을 확인하는 입문 문제입니다.",
-                recommendedOrder: 1,
-                required: true,
-                estimatedMinutes: 10,
-                reason: "가장 쉬운 워밍업 문제입니다."
-            },
-            {
-                order: 2,
-                id: 10828,
-                title: "스택 명령 처리",
-                difficulty: "Medium",
-                category: "자료구조",
-                score: 150,
-                points: 100,
-                status: "solved",
-                solvedRate: 60.5,
-                submissions: 119,
-                timeLimit: "2초",
-                memoryLimit: "512MB",
-                tags: ["stack", "data-structure", "자료구조"],
-                memo: "스택 명령 처리와 입출력 최적화를 연습합니다.",
-                recommendedOrder: 2,
-                required: true,
-                estimatedMinutes: 20,
-                reason: "자료구조 기본 구현력을 확인합니다."
-            },
-            {
-                order: 3,
-                id: 7576,
-                title: "토마토",
-                difficulty: "Medium",
-                category: "그래프",
-                score: 180,
-                points: 120,
-                status: "wrong",
-                solvedRate: 45.8,
-                submissions: 96,
-                timeLimit: "1초",
-                memoryLimit: "256MB",
-                tags: ["bfs", "queue", "graph"],
-                memo: "다중 시작점 BFS입니다. 모든 익은 토마토를 큐에 넣어야 합니다.",
-                recommendedOrder: 3,
-                required: true,
-                estimatedMinutes: 30,
-                reason: "다중 시작점 BFS를 점검합니다."
-            },
-            {
-                order: 4,
-                id: 12865,
-                title: "평범한 배낭",
-                difficulty: "Hard",
-                category: "DP",
-                score: 200,
-                points: 120,
-                status: "wrong",
-                solvedRate: 38.1,
-                submissions: 76,
-                timeLimit: "2초",
-                memoryLimit: "512MB",
-                tags: ["dp", "knapsack"],
-                memo: "1차원 DP는 무게를 뒤에서 앞으로 갱신해야 합니다.",
-                recommendedOrder: 4,
-                required: true,
-                estimatedMinutes: 40,
-                reason: "고득점 변별 문제입니다."
-            },
-            {
-                order: 5,
-                id: 2178,
-                title: "미로 탐색",
-                difficulty: "Medium",
-                category: "그래프",
-                score: 150,
-                points: 80,
-                status: "todo",
-                solvedRate: 44.7,
-                submissions: 115,
-                timeLimit: "1초",
-                memoryLimit: "256MB",
-                tags: ["bfs", "graph", "grid"],
-                memo: "격자 BFS의 기본 문제입니다.",
-                recommendedOrder: 5,
-                required: false,
-                estimatedMinutes: 20,
-                reason: "남은 시간에 시도하기 좋은 그래프 문제입니다."
-            }
-        ]
-    },
-    {
-        id: "dp-core-challenge",
-        title: "DP 핵심 챌린지",
-        description: "점화식 설계, LIS, 0/1 배낭을 포함한 DP 집중 테스트입니다.",
-        category: "DP",
-        difficulty: "Hard",
-        status: "review",
-        recommended: true,
-        featured: true,
-        totalScore: 700,
-        myScore: 120,
-        durationMinutes: 180,
-        participants: 94,
-        averageScore: 218,
-        rank: 67,
-        startAt: "2026-04-25T09:00:00",
-        startAtText: "2026.04.25 09:00",
-        endAt: "2026-05-02T23:59:00",
-        endAtText: "2026.05.02 23:59",
-        updatedAt: "2026-05-02",
-        tags: ["DP", "LIS", "Knapsack", "점화식"],
-        companies: ["중급", "고난도"],
-        rules: [
-            "총 5문제이며 제한 시간은 180분입니다.",
-            "점수는 문제별 난이도에 따라 다르게 배정됩니다.",
-            "복습 모드에서는 풀이 기록과 실패 케이스를 함께 확인할 수 있습니다."
-        ],
-        guide: [
-            "각 문제마다 dp 배열의 의미를 먼저 적으세요.",
-            "기저 상태와 배열 범위를 먼저 확인하세요.",
-            "1차원 DP 최적화는 갱신 방향을 반드시 검토하세요."
-        ],
-        analysis: [
-            { title: "현재 점수", description: "획득한 점수입니다.", value: "120 / 700", tone: "red" },
-            { title: "평균 대비", description: "평균보다 낮습니다.", value: "-98점", tone: "orange" },
-            { title: "약점 태그", description: "가장 많이 틀린 유형입니다.", value: "Knapsack", tone: "red" },
-            { title: "추천 행동", description: "1차원 DP 갱신 방향을 복습하세요.", value: "배낭", tone: "blue" }
-        ],
-        problems: [
-            {
-                order: 1,
-                id: 1463,
-                title: "1로 만들기",
-                difficulty: "Medium",
-                category: "DP",
-                score: 140,
-                points: 120,
-                status: "todo",
-                solvedRate: 49.5,
-                submissions: 178,
-                timeLimit: "1초",
-                memoryLimit: "256MB",
-                tags: ["dp", "dynamic-programming"],
-                memo: "dp[i]를 i를 1로 만드는 최소 연산 수로 정의합니다.",
-                recommendedOrder: 1,
-                required: true,
-                estimatedMinutes: 25,
-                reason: "기본 점화식 설계 문제입니다."
-            },
-            {
-                order: 2,
-                id: 11053,
-                title: "가장 긴 증가하는 부분 수열",
-                difficulty: "Medium",
-                category: "DP",
-                score: 150,
-                points: 140,
-                status: "solved",
-                solvedRate: 63.3,
-                submissions: 101,
-                timeLimit: "1초",
-                memoryLimit: "256MB",
-                tags: ["dp", "lis", "binary-search"],
-                memo: "O(N²) DP와 O(N log N) 풀이를 모두 연습할 수 있습니다.",
-                recommendedOrder: 2,
-                required: true,
-                estimatedMinutes: 30,
-                reason: "부분 수열 DP의 대표 문제입니다."
-            },
-            {
-                order: 3,
-                id: 12865,
-                title: "평범한 배낭",
-                difficulty: "Hard",
-                category: "DP",
-                score: 200,
-                points: 180,
-                status: "wrong",
-                solvedRate: 38.1,
-                submissions: 76,
-                timeLimit: "2초",
-                memoryLimit: "512MB",
-                tags: ["dp", "knapsack"],
-                memo: "1차원 DP는 무게를 뒤에서 앞으로 갱신해야 합니다.",
-                recommendedOrder: 3,
-                required: true,
-                estimatedMinutes: 45,
-                reason: "0/1 배낭 대표 문제입니다."
-            }
-        ]
-    },
-    {
-        id: "beginner-basic-test",
-        title: "입문 기본기 테스트",
-        description: "입출력, 조건문, 반복문, 문자열 처리 중심의 기초 점검 테스트입니다.",
-        category: "입문",
-        difficulty: "Easy",
-        status: "completed",
-        recommended: false,
-        featured: true,
-        totalScore: 400,
-        myScore: 380,
-        durationMinutes: 90,
-        participants: 342,
-        averageScore: 301,
-        rank: 18,
-        startAt: "2026-04-20T09:00:00",
-        startAtText: "2026.04.20 09:00",
-        endAt: "2026-04-30T23:59:00",
-        endAtText: "2026.04.30 23:59",
-        updatedAt: "2026-04-30",
-        tags: ["입출력", "구현", "문자열"],
-        companies: ["입문", "기초"],
-        rules: ["총 8문제이며 제한 시간은 90분입니다.", "기초 문법과 입출력 형식을 확인합니다."],
-        guide: ["출력 형식을 꼼꼼히 확인하세요.", "반복문 범위와 인덱스 실수를 줄이세요."],
-        analysis: [
-            { title: "현재 점수", description: "획득한 점수입니다.", value: "380 / 400", tone: "green" },
-            { title: "평균 대비", description: "평균보다 높습니다.", value: "+79점", tone: "green" },
-            { title: "강점 태그", description: "높은 정답률을 보인 태그입니다.", value: "구현", tone: "blue" },
-            { title: "추천 행동", description: "다음 단계로 BFS를 추천합니다.", value: "BFS", tone: "orange" }
-        ],
-        problems: [
-            {
-                order: 1,
-                id: 1000,
-                title: "두 수의 합",
-                difficulty: "Easy",
-                category: "구현",
-                score: 100,
-                points: 50,
-                status: "solved",
-                solvedRate: 69.5,
-                submissions: 184,
-                timeLimit: "1초",
-                memoryLimit: "256MB",
-                tags: ["implementation", "math", "입출력"],
-                memo: "기본 입출력과 사칙연산을 확인하는 입문 문제입니다.",
-                recommendedOrder: 1,
-                required: true,
-                estimatedMinutes: 5,
-                reason: "기본 입출력 확인용 문제입니다."
-            },
-            {
-                order: 2,
-                id: 2675,
-                title: "문자열 반복",
-                difficulty: "Easy",
-                category: "문자열",
-                score: 100,
-                points: 60,
-                status: "solved",
-                solvedRate: 66.2,
-                submissions: 128,
-                timeLimit: "1초",
-                memoryLimit: "256MB",
-                tags: ["string", "implementation"],
-                memo: "문자 단위 반복 출력 문제입니다.",
-                recommendedOrder: 2,
-                required: true,
-                estimatedMinutes: 10,
-                reason: "문자열 반복 출력 형식 연습에 좋습니다."
-            }
-        ]
-    }
-];
-
 const DIFFICULTY_OPTIONS: readonly DifficultyFilter[] = ["전체", "Easy", "Medium", "Hard"];
 const STATUS_OPTIONS: readonly ProblemStatusFilter[] = ["전체", "해결", "오답", "미해결", "복습"];
 const SORT_OPTIONS: readonly SortOption[] = ["order", "number-asc", "difficulty", "score-desc", "solved-rate", "status"];
@@ -486,12 +160,8 @@ const analysisToneClass: Record<TestDetail["analysis"][number]["tone"], string> 
     red: "bg-rose-50 text-rose-700"
 };
 
-function getTest(id: string) {
-    return TESTS.find((test) => test.id === id);
-}
-
 function normalizeTestFromApi(data: unknown): TestDetail | null {
-    const payload = data as { test?: Partial<TestDetail> & { durationMin?: number }; problems?: TestProblem[] } | null;
+    const payload = data as { test?: Partial<TestDetail> & { durationMin?: number; type?: string }; problems?: TestProblem[] } | null;
     const test = payload?.test;
 
     if (!test?.id || !test.title) {
@@ -509,7 +179,7 @@ function normalizeTestFromApi(data: unknown): TestDetail | null {
         id: String(test.id),
         title: String(test.title),
         description: String(test.description ?? ""),
-        category: String(test.category ?? test.type ?? "mock") as TestCategory,
+        category: String(test.category ?? test.type ?? "test") as TestCategory,
         difficulty: (test.difficulty === "Medium" || test.difficulty === "Hard" ? test.difficulty : "Easy") as Difficulty,
         status: (test.status === "scheduled" || test.status === "completed" || test.status === "review" ? test.status : "open") as TestStatus,
         recommended: Boolean(test.recommended ?? true),
@@ -689,7 +359,6 @@ function OverviewTab({ test }: { test: TestDetail }) {
 }
 
 function ProblemsTab({
-                         test,
                          filteredProblems,
                          keyword,
                          setKeyword,
@@ -703,7 +372,6 @@ function ProblemsTab({
                          setViewMode,
                          resetFilters
                      }: {
-    test: TestDetail;
     filteredProblems: TestProblem[];
     keyword: string;
     setKeyword: (value: string) => void;
@@ -879,7 +547,8 @@ function NotFoundTest({ id }: { id: string }) {
 export default function TestDetailPage() {
     const params = useParams<{ id: string }>();
     const id = String(params.id ?? "");
-    const test = getTest(id);
+    const [test, setTest] = useState<TestDetail | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const [activeTab, setActiveTab] = useState<DetailTab>("overview");
     const [keyword, setKeyword] = useState("");
@@ -887,6 +556,50 @@ export default function TestDetailPage() {
     const [status, setStatus] = useState<ProblemStatusFilter>("전체");
     const [sort, setSort] = useState<SortOption>("order");
     const [viewMode, setViewMode] = useState<ViewMode>("card");
+
+    useEffect(() => {
+        let ignore = false;
+
+        async function loadTest() {
+            try {
+                setIsLoading(true);
+
+                const response = await fetch(`/api/tests/${encodeURIComponent(id)}`, { cache: "no-store" });
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message ?? "테스트 데이터를 불러오지 못했습니다.");
+                }
+
+                const nextTest = normalizeTestFromApi(data);
+
+                if (!nextTest) {
+                    throw new Error("테스트 API 응답 형식이 올바르지 않습니다.");
+                }
+
+                if (!ignore) {
+                    setTest(nextTest);
+                }
+            } catch (error) {
+                if (!ignore) {
+                    setTest(null);
+                    console.error("Failed to load test detail", error);
+                }
+            } finally {
+                if (!ignore) {
+                    setIsLoading(false);
+                }
+            }
+        }
+
+        if (id) {
+            void loadTest();
+        }
+
+        return () => {
+            ignore = true;
+        };
+    }, [id]);
 
     const filteredProblems = useMemo(() => {
         if (!test) return [];
@@ -927,6 +640,16 @@ export default function TestDetailPage() {
             }
         });
     }, [test, keyword, difficulty, status, sort]);
+
+    if (isLoading) {
+        return (
+            <AppShell title="테스트를 불러오는 중입니다" description="DB에서 테스트 상세 정보를 읽고 있습니다.">
+                <Card className="p-6 text-sm font-bold text-slate-500">
+                    테스트 데이터를 불러오는 중입니다.
+                </Card>
+            </AppShell>
+        );
+    }
 
     if (!test) {
         return <NotFoundTest id={id} />;
@@ -1003,7 +726,6 @@ export default function TestDetailPage() {
                         {activeTab === "overview" && <OverviewTab test={test} />}
                         {activeTab === "problems" && (
                             <ProblemsTab
-                                test={test}
                                 filteredProblems={filteredProblems}
                                 keyword={keyword}
                                 setKeyword={setKeyword}

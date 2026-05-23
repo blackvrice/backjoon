@@ -3,6 +3,7 @@
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/auth";
 import { getLanguageConfig, normalizeLanguage } from "@/server/judge/languageConfig";
 
 export const runtime = "nodejs";
@@ -45,6 +46,7 @@ function safeSourceFile(sourceFile: unknown, fallback: string) {
 }
 
 export async function POST(request: Request) {
+    const currentUser = await getCurrentUser();
     let body: Body;
 
     try {
@@ -197,6 +199,7 @@ export async function POST(request: Request) {
     const submission = await prisma.submission.create({
         data: {
             problemId,
+            userId: currentUser?.id,
             language: normalizedLanguage,
             sourceFile,
             code,

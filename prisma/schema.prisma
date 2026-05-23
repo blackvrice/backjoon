@@ -37,6 +37,7 @@ model User {
   favorites         Favorite[]
   testAttempts      TestAttempt[]
   adminLogs         AdminLog[]
+  sessions          AuthSession[]
 
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
@@ -44,6 +45,22 @@ model User {
   @@index([status])
   @@index([role])
   @@index([score])
+}
+
+model AuthSession {
+  id         String   @id
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userAgent  String   @default("")
+  ip         String   @default("127.0.0.1")
+  expiresAt  DateTime
+  lastSeenAt DateTime @default(now())
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId])
+  @@index([expiresAt])
 }
 
 model Problem {

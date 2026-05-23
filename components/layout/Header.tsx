@@ -3,9 +3,11 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import {
     Bell,
     Command,
+    LogOut,
     Menu,
     Search,
     Settings,
@@ -19,7 +21,41 @@ export type HeaderProps = {
     onMenuClick: () => void;
 };
 
+type HeaderUser = {
+    handle: string;
+    name: string | null;
+    role: string;
+};
+
 export default function Header({ title, description, actions, onMenuClick }: HeaderProps) {
+    const [user, setUser] = useState<HeaderUser | null>(null);
+
+    useEffect(() => {
+        let ignore = false;
+
+        async function loadUser() {
+            const response = await fetch("/api/auth/me", { cache: "no-store" }).catch(() => null);
+            if (!response?.ok) return;
+
+            const data = await response.json().catch(() => null);
+            if (!ignore && data?.user) {
+                setUser(data.user);
+            }
+        }
+
+        void loadUser();
+
+        return () => {
+            ignore = true;
+        };
+    }, []);
+
+    const handleLogout = async () => {
+        await fetch("/api/auth/logout", { method: "POST" }).catch(() => null);
+        setUser(null);
+        window.location.href = "/login";
+    };
+
     return (
         <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/85 backdrop-blur-xl">
             <div className="flex min-h-16 items-center gap-3 px-4 py-3 md:px-6">
@@ -70,13 +106,33 @@ export default function Header({ title, description, actions, onMenuClick }: Hea
                         <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-blue-600" />
                     </button>
 
-                    <Link
-                        href="/profile/kimcode"
-                        className="inline-flex h-10 items-center gap-2 rounded-2xl bg-slate-950 px-3 text-sm font-black text-white shadow-sm transition hover:bg-slate-800"
-                    >
-                        <UserRound className="h-4 w-4" />
-                        <span className="hidden sm:inline">kimcode</span>
-                    </Link>
+                    {user ? (
+                        <div className="flex items-center gap-2">
+                            <Link
+                                href={`/profile/${user.handle}`}
+                                className="inline-flex h-10 items-center gap-2 rounded-2xl bg-slate-950 px-3 text-sm font-black text-white shadow-sm transition hover:bg-slate-800"
+                            >
+                                <UserRound className="h-4 w-4" />
+                                <span className="hidden sm:inline">{user.name ?? user.handle}</span>
+                            </Link>
+                            <button
+                                type="button"
+                                onClick={handleLogout}
+                                className="hidden h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:bg-slate-50 hover:text-slate-950 sm:inline-flex"
+                                aria-label="로그아웃"
+                            >
+                                <LogOut className="h-4 w-4" />
+                            </button>
+                        </div>
+                    ) : (
+                        <Link
+                            href="/login"
+                            className="inline-flex h-10 items-center gap-2 rounded-2xl bg-slate-950 px-3 text-sm font-black text-white shadow-sm transition hover:bg-slate-800"
+                        >
+                            <UserRound className="h-4 w-4" />
+                            <span className="hidden sm:inline">로그인</span>
+                        </Link>
+                    )}
                 </div>
             </div>
         </header>

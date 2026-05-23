@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -125,6 +126,7 @@ function SecurityItem({ label }: { label: string }) {
 }
 
 export default function LoginPage() {
+    const router = useRouter();
     const [email, setEmail] = useState("user@codetest.local");
     const [password, setPassword] = useState("Demo1234!");
     const [rememberMe, setRememberMe] = useState(true);
@@ -145,7 +147,7 @@ export default function LoginPage() {
         window.setTimeout(() => setMessage(null), 1800);
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setMethod("email");
 
@@ -164,7 +166,21 @@ export default function LoginPage() {
             return;
         }
 
-        setMessage("로그인 mock 처리 완료. 실제 연결 시 /api/auth/login으로 요청하면 됩니다.");
+        const response = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ email, password, rememberMe }),
+        });
+        const data = await response.json().catch(() => null);
+
+        if (!response.ok) {
+            setMessage(data?.message ?? "로그인에 실패했습니다.");
+            return;
+        }
+
+        setMessage("로그인 완료. 대시보드로 이동합니다.");
+        router.push("/dashboard");
+        router.refresh();
     };
 
     const handleOAuth = (nextMethod: LoginMethod) => {

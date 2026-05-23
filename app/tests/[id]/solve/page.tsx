@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ComponentType } from "react";
 import {
     AppButton,
@@ -49,6 +49,7 @@ type ExampleCase = {
 };
 
 type TestProblem = {
+    dbId?: number;
     id: number;
     order: number;
     title: string;
@@ -58,6 +59,9 @@ type TestProblem = {
     estimatedMinutes: number;
     timeLimit: string;
     memoryLimit: string;
+    timeLimitMs?: number;
+    memoryLimitMb?: number;
+    compareMode?: string;
     solvedRate: number;
     tags: string[];
     description: string;
@@ -227,178 +231,6 @@ public class Program
 `
 });
 
-const TESTS: TestDetail[] = [
-    {
-        id: "coding-test-practice-1",
-        title: "실전 코딩테스트 1회차",
-        description: "구현, 자료구조, 탐색, DP를 섞어 제한 시간 안에 푸는 실전형 모의 테스트입니다.",
-        status: "open",
-        durationMinutes: 120,
-        remainingSeconds: 4380,
-        totalScore: 500,
-        currentScore: 210,
-        startedAtText: "2026.05.03 09:00",
-        endAtText: "2026.05.10 23:59",
-        problems: [
-            {
-                id: 1000,
-                order: 1,
-                title: "두 수의 합",
-                difficulty: "Easy",
-                status: "solved",
-                points: 80,
-                estimatedMinutes: 10,
-                timeLimit: "1초",
-                memoryLimit: "256MB",
-                solvedRate: 69.5,
-                tags: ["implementation", "math", "입출력"],
-                description: "두 정수 A와 B가 주어졌을 때, A+B를 출력하세요.",
-                inputDescription: "첫째 줄에 A와 B가 주어집니다.",
-                outputDescription: "첫째 줄에 A+B를 출력합니다.",
-                constraints: ["0 < A, B < 10"],
-                notes: [
-                    "기본 입출력 확인용 문제입니다.",
-                    "공백으로 구분된 두 정수를 읽으면 됩니다."
-                ],
-                examples: [
-                    {
-                        input: "1 2",
-                        output: "3"
-                    }
-                ],
-                defaultCodes: createDefaultCodes("두 수의 합")
-            },
-            {
-                id: 10828,
-                order: 2,
-                title: "스택 명령 처리",
-                difficulty: "Medium",
-                status: "solved",
-                points: 100,
-                estimatedMinutes: 20,
-                timeLimit: "2초",
-                memoryLimit: "512MB",
-                solvedRate: 60.5,
-                tags: ["stack", "data-structure", "자료구조"],
-                description: "정수를 저장하는 스택을 구현한 다음, 입력으로 주어지는 명령을 처리하세요.",
-                inputDescription: "첫째 줄에 명령의 수 N이 주어집니다. 다음 N개의 줄에는 명령이 하나씩 주어집니다.",
-                outputDescription: "출력을 요구하는 명령마다 한 줄에 하나씩 결과를 출력합니다.",
-                constraints: [
-                    "1 ≤ N ≤ 10,000",
-                    "push X에서 X는 1 이상 100,000 이하입니다."
-                ],
-                notes: [
-                    "C++은 ios::sync_with_stdio(false)를 권장합니다.",
-                    "Java는 BufferedReader와 StringBuilder 사용이 좋습니다."
-                ],
-                examples: [
-                    {
-                        input: "7\npop\ntop\npush 123\ntop\npop\ntop\npop",
-                        output: "-1\n-1\n123\n123\n-1\n-1"
-                    }
-                ],
-                defaultCodes: createDefaultCodes("스택 명령 처리")
-            },
-            {
-                id: 7576,
-                order: 3,
-                title: "토마토",
-                difficulty: "Medium",
-                status: "wrong",
-                points: 120,
-                estimatedMinutes: 30,
-                timeLimit: "1초",
-                memoryLimit: "256MB",
-                solvedRate: 45.8,
-                tags: ["bfs", "queue", "graph"],
-                description: "보관된 토마토들이 며칠이 지나면 모두 익게 되는지 최소 일수를 구하세요. 익은 토마토는 하루가 지나면 인접한 익지 않은 토마토를 익게 합니다.",
-                inputDescription: "첫째 줄에 상자의 가로 칸 수 M과 세로 칸 수 N이 주어집니다. 다음 N개의 줄에는 상자의 상태가 주어집니다.",
-                outputDescription: "토마토가 모두 익을 때까지의 최소 날짜를 출력합니다. 모두 익지 못하면 -1을 출력합니다.",
-                constraints: [
-                    "2 ≤ M, N ≤ 1,000",
-                    "1은 익은 토마토, 0은 익지 않은 토마토, -1은 빈 칸입니다."
-                ],
-                notes: [
-                    "다중 시작점 BFS입니다.",
-                    "모든 익은 토마토를 큐에 먼저 넣고 시작해야 합니다.",
-                    "마지막에 0이 남아 있는지 검사해야 합니다."
-                ],
-                examples: [
-                    {
-                        input: "6 4\n0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 1",
-                        output: "8"
-                    }
-                ],
-                defaultCodes: createDefaultCodes("토마토")
-            },
-            {
-                id: 12865,
-                order: 4,
-                title: "평범한 배낭",
-                difficulty: "Hard",
-                status: "wrong",
-                points: 120,
-                estimatedMinutes: 40,
-                timeLimit: "2초",
-                memoryLimit: "512MB",
-                solvedRate: 38.1,
-                tags: ["dp", "knapsack"],
-                description: "무게와 가치가 있는 물건들이 있을 때, 최대 K만큼의 무게만 넣을 수 있는 배낭에 넣을 수 있는 물건 가치의 최댓값을 구하세요.",
-                inputDescription: "첫째 줄에 물품의 수 N과 버틸 수 있는 무게 K가 주어집니다. 다음 N개의 줄에는 각 물건의 무게 W와 가치 V가 주어집니다.",
-                outputDescription: "배낭에 넣을 수 있는 물건들의 가치합의 최댓값을 출력합니다.",
-                constraints: [
-                    "1 ≤ N ≤ 100",
-                    "1 ≤ K ≤ 100,000",
-                    "1 ≤ W ≤ 100,000",
-                    "0 ≤ V ≤ 1,000"
-                ],
-                notes: [
-                    "0/1 배낭 문제입니다.",
-                    "1차원 DP는 무게를 뒤에서 앞으로 갱신해야 같은 물건을 중복 선택하지 않습니다."
-                ],
-                examples: [
-                    {
-                        input: "4 7\n6 13\n4 8\n3 6\n5 12",
-                        output: "14"
-                    }
-                ],
-                defaultCodes: createDefaultCodes("평범한 배낭")
-            },
-            {
-                id: 2178,
-                order: 5,
-                title: "미로 탐색",
-                difficulty: "Medium",
-                status: "todo",
-                points: 80,
-                estimatedMinutes: 20,
-                timeLimit: "1초",
-                memoryLimit: "256MB",
-                solvedRate: 44.7,
-                tags: ["bfs", "graph", "grid"],
-                description: "N×M 크기의 미로에서 1은 이동할 수 있는 칸, 0은 이동할 수 없는 칸입니다. (1,1)에서 (N,M)까지 이동하는 최소 칸 수를 구하세요.",
-                inputDescription: "첫째 줄에 N과 M이 주어지고, 다음 N개의 줄에는 미로가 주어집니다.",
-                outputDescription: "지나야 하는 최소 칸 수를 출력합니다.",
-                constraints: [
-                    "2 ≤ N, M ≤ 100",
-                    "항상 도착 위치로 이동할 수 있는 경우만 주어집니다."
-                ],
-                notes: [
-                    "격자 BFS의 기본 문제입니다.",
-                    "거리 배열을 별도로 두거나 방문 배열에 거리를 저장할 수 있습니다."
-                ],
-                examples: [
-                    {
-                        input: "4 6\n101111\n101010\n101011\n111011",
-                        output: "15"
-                    }
-                ],
-                defaultCodes: createDefaultCodes("미로 탐색")
-            }
-        ]
-    }
-];
-
 const idleResult: RunResult = {
     status: "idle",
     title: "아직 실행하지 않았습니다.",
@@ -409,8 +241,60 @@ const idleResult: RunResult = {
     logs: ["Ready"]
 };
 
-function getTest(id: string) {
-    return TESTS.find((test) => test.id === id);
+function normalizeTestFromApi(data: unknown): TestDetail | null {
+    const payload = data as {
+        test?: Partial<TestDetail> & { durationMin?: number; myScore?: number | null; startAtText?: string };
+        problems?: Array<Partial<TestProblem> & { hints?: string[] }>;
+    } | null;
+    const test = payload?.test;
+
+    if (!test?.id || !test.title) {
+        return null;
+    }
+
+    const rawProblems = (Array.isArray(test.problems) ? test.problems : payload?.problems ?? []) as Array<Partial<TestProblem> & { hints?: string[] }>;
+    const problems = rawProblems.map((problem, index) => ({
+        dbId: Number(problem.dbId ?? problem.id),
+        id: Number(problem.id),
+        order: Number(problem.order ?? index + 1),
+        title: String(problem.title ?? ""),
+        difficulty: (problem.difficulty === "Medium" || problem.difficulty === "Hard" ? problem.difficulty : "Easy") as Difficulty,
+        status: (problem.status === "solved" || problem.status === "wrong" || problem.status === "review" ? problem.status : "todo") as ProblemStatus,
+        points: Number(problem.points ?? 0),
+        estimatedMinutes: Number(problem.estimatedMinutes ?? 0),
+        timeLimit: String(problem.timeLimit ?? "-"),
+        memoryLimit: String(problem.memoryLimit ?? "-"),
+        timeLimitMs: Number(problem.timeLimitMs ?? 2000),
+        memoryLimitMb: Number(problem.memoryLimitMb ?? 256),
+        compareMode: String(problem.compareMode ?? "default"),
+        solvedRate: Number(problem.solvedRate ?? 0),
+        tags: Array.isArray(problem.tags) ? problem.tags.map(String) : [],
+        description: String(problem.description ?? ""),
+        inputDescription: String(problem.inputDescription ?? ""),
+        outputDescription: String(problem.outputDescription ?? ""),
+        constraints: Array.isArray(problem.constraints) ? problem.constraints.map(String) : [],
+        notes: Array.isArray(problem.notes) ? problem.notes.map(String) : Array.isArray(problem.hints) ? problem.hints.map(String) : [],
+        examples: Array.isArray(problem.examples) ? problem.examples.map((example) => ({
+            input: String(example.input ?? ""),
+            output: String(example.output ?? ""),
+            explanation: example.explanation ? String(example.explanation) : undefined,
+        })) : [],
+        defaultCodes: problem.defaultCodes ?? createDefaultCodes(String(problem.title ?? "")),
+    }));
+
+    return {
+        id: String(test.id),
+        title: String(test.title),
+        description: String(test.description ?? ""),
+        status: (test.status === "scheduled" || test.status === "completed" || test.status === "review" ? test.status : "open") as TestStatus,
+        durationMinutes: Number(test.durationMinutes ?? test.durationMin ?? 0),
+        remainingSeconds: Number(test.remainingSeconds ?? Number(test.durationMinutes ?? test.durationMin ?? 0) * 60),
+        totalScore: Number(test.totalScore ?? problems.reduce((sum, problem) => sum + problem.points, 0)),
+        currentScore: Number(test.currentScore ?? test.myScore ?? 0),
+        startedAtText: String(test.startedAtText ?? test.startAtText ?? "-"),
+        endAtText: String(test.endAtText ?? "-"),
+        problems,
+    };
 }
 
 function formatTime(totalSeconds: number) {
@@ -896,7 +780,7 @@ function ConsolePanel({
                         <HelpItem
                             icon={Terminal}
                             title="실행"
-                            description="현재는 mock 실행입니다. 실제 구현에서는 /api/judge/run으로 코드를 전송하면 됩니다."
+                            description="현재는 DB 테스트 데이터 기준 실행입니다. 실행/제출은 /api/judge와 연결됩니다."
                         />
 
                         <HelpItem
@@ -952,11 +836,10 @@ function NotFoundTest({ id }: { id: string }) {
 export default function TestSolvePage() {
     const params = useParams<{ id: string }>();
     const id = String(params.id ?? "");
-    const test = getTest(id);
+    const [test, setTest] = useState<TestDetail | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const initialProblem = test ? getNextUnsolvedProblem(test) : undefined;
-
-    const [activeProblemId, setActiveProblemId] = useState(initialProblem?.id ?? 0);
+    const [activeProblemId, setActiveProblemId] = useState(0);
     const [language, setLanguage] = useState<Language>("C++17");
     const [problemTab, setProblemTab] = useState<ProblemTab>("description");
     const [consoleTab, setConsoleTab] = useState<ConsoleTab>("result");
@@ -969,13 +852,66 @@ export default function TestSolvePage() {
         return test.problems.find((problem) => problem.id === activeProblemId) ?? test.problems[0];
     }, [test, activeProblemId]);
 
-    const [codes, setCodes] = useState<Record<number, Record<Language, string>>>(() => {
-        if (!test) return {};
+    const [codes, setCodes] = useState<Record<number, Record<Language, string>>>({});
 
-        return Object.fromEntries(
-            test.problems.map((problem) => [problem.id, problem.defaultCodes])
-        ) as Record<number, Record<Language, string>>;
-    });
+    useEffect(() => {
+        let ignore = false;
+
+        async function loadTest() {
+            try {
+                setIsLoading(true);
+
+                const response = await fetch(`/api/tests/${encodeURIComponent(id)}`, { cache: "no-store" });
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message ?? "테스트 데이터를 불러오지 못했습니다.");
+                }
+
+                const nextTest = normalizeTestFromApi(data);
+
+                if (!nextTest) {
+                    throw new Error("테스트 API 응답 형식이 올바르지 않습니다.");
+                }
+
+                if (!ignore) {
+                    const initialProblem = getNextUnsolvedProblem(nextTest);
+                    setTest(nextTest);
+                    setActiveProblemId(initialProblem?.id ?? 0);
+                    setCodes(Object.fromEntries(
+                        nextTest.problems.map((problem) => [problem.id, problem.defaultCodes])
+                    ) as Record<number, Record<Language, string>>);
+                }
+            } catch (error) {
+                if (!ignore) {
+                    console.error("Failed to load test solve data", error);
+                    setTest(null);
+                }
+            } finally {
+                if (!ignore) {
+                    setIsLoading(false);
+                }
+            }
+        }
+
+        if (id) {
+            void loadTest();
+        }
+
+        return () => {
+            ignore = true;
+        };
+    }, [id]);
+
+    if (isLoading) {
+        return (
+            <main className="min-h-screen bg-slate-50 p-6">
+                <Card className="p-6 text-sm font-bold text-slate-500">
+                    테스트 풀이 데이터를 DB에서 불러오는 중입니다.
+                </Card>
+            </main>
+        );
+    }
 
     if (!test || !activeProblem) {
         return <NotFoundTest id={id} />;
@@ -1024,13 +960,13 @@ export default function TestSolvePage() {
         showMessage("예제 입력을 사용자 입력에 복사했습니다.");
     };
 
-    const handleRun = () => {
+    const handleRun = async () => {
         setConsoleTab("result");
 
         setResult({
             status: "accepted",
             title: "예제 실행 완료",
-            message: "mock 실행 결과입니다. 실제 구현 시 judge API와 연결하세요.",
+            message: "DB 샘플 데이터 기준 실행 결과입니다. /api/judge 연결로 실제 실행 결과를 표시할 수 있습니다.",
             time: "4ms",
             memory: "2024KB",
             output: activeProblem.examples[0]?.output ?? "",
@@ -1043,7 +979,7 @@ export default function TestSolvePage() {
         });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setConsoleTab("result");
 
         setResult({
@@ -1051,8 +987,8 @@ export default function TestSolvePage() {
             title: activeProblem.status === "wrong" ? "제출 결과: 오답" : "제출 결과: 맞았습니다",
             message:
                 activeProblem.status === "wrong"
-                    ? "샘플 데이터 기준 mock 오답입니다. 실제 구현 시 채점 서버 결과로 교체하세요."
-                    : "샘플 데이터 기준 mock 정답입니다.",
+                    ? "DB 샘플 데이터 기준 오답입니다. 채점 서버 결과로 교체할 수 있습니다."
+                    : "DB 샘플 데이터 기준 정답입니다.",
             time: "20ms",
             memory: "4020KB",
             output: activeProblem.status === "wrong" ? "Wrong Answer" : "Accepted",

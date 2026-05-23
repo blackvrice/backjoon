@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ComponentType } from "react";
 import AppShell from "@/components/layout/AppShell";
 import {
@@ -40,13 +40,9 @@ import {
     ArrowLeft,
     ArrowRight,
     BarChart3,
-    BookOpen,
     CheckCircle2,
     ChevronRight,
     Clock3,
-    Code2,
-    Database,
-    FileCode2,
     Flame,
     Gauge,
     Hash,
@@ -58,7 +54,6 @@ import {
     RotateCcw,
     Search,
     Sparkles,
-    Star,
     Target,
     Terminal,
     Timer,
@@ -138,313 +133,6 @@ type TestResult = {
     }>;
 };
 
-const TEST_RESULTS: TestResult[] = [
-    {
-        id: "coding-test-practice-1",
-        title: "실전 코딩테스트 1회차",
-        description: "구현, 자료구조, 탐색, DP를 섞어 제한 시간 안에 푸는 실전형 모의 테스트입니다.",
-        totalScore: 500,
-        myScore: 210,
-        averageScore: 248,
-        topScore: 480,
-        rank: 42,
-        participants: 128,
-        grade: "C",
-        durationMinutes: 120,
-        timeSpentMinutes: 112,
-        startedAtText: "2026.05.03 09:00",
-        submittedAtText: "2026.05.03 10:52",
-        tags: ["구현", "BFS", "DP", "자료구조"],
-        problems: [
-            {
-                id: 1000,
-                order: 1,
-                title: "두 수의 합",
-                difficulty: "Easy",
-                status: "solved",
-                points: 80,
-                earned: 80,
-                attempts: 1,
-                solvedRate: 69.5,
-                timeSpentMinutes: 5,
-                tags: ["implementation", "math"],
-                note: "빠르게 해결했습니다.",
-                lastSubmissionId: 202605030001
-            },
-            {
-                id: 10828,
-                order: 2,
-                title: "스택 명령 처리",
-                difficulty: "Medium",
-                status: "solved",
-                points: 100,
-                earned: 100,
-                attempts: 2,
-                solvedRate: 60.5,
-                timeSpentMinutes: 18,
-                tags: ["stack", "data-structure"],
-                note: "입출력 최적화 후 통과했습니다.",
-                lastSubmissionId: 202605030002
-            },
-            {
-                id: 7576,
-                order: 3,
-                title: "토마토",
-                difficulty: "Medium",
-                status: "wrong",
-                points: 120,
-                earned: 30,
-                attempts: 4,
-                solvedRate: 45.8,
-                timeSpentMinutes: 35,
-                tags: ["bfs", "queue", "graph"],
-                note: "다중 시작점 BFS 처리에서 실수가 있었습니다.",
-                lastSubmissionId: 202605030014
-            },
-            {
-                id: 12865,
-                order: 4,
-                title: "평범한 배낭",
-                difficulty: "Hard",
-                status: "wrong",
-                points: 120,
-                earned: 0,
-                attempts: 2,
-                solvedRate: 38.1,
-                timeSpentMinutes: 38,
-                tags: ["dp", "knapsack"],
-                note: "1차원 DP 갱신 방향을 반대로 처리해야 합니다.",
-                lastSubmissionId: 202605030004
-            },
-            {
-                id: 2178,
-                order: 5,
-                title: "미로 탐색",
-                difficulty: "Medium",
-                status: "todo",
-                points: 80,
-                earned: 0,
-                attempts: 0,
-                solvedRate: 44.7,
-                timeSpentMinutes: 16,
-                tags: ["bfs", "grid"],
-                note: "시간 부족으로 제출하지 못했습니다."
-            }
-        ],
-        submissions: [
-            {
-                id: 202605030014,
-                problemId: 7576,
-                problemTitle: "토마토",
-                status: "accepted",
-                language: "C++17",
-                time: "20ms",
-                memory: "4020KB",
-                submittedAt: "2026.05.03 12:02",
-                codeLength: "1488B"
-            },
-            {
-                id: 202605030004,
-                problemId: 12865,
-                problemTitle: "평범한 배낭",
-                status: "wrong",
-                language: "C++17",
-                time: "20ms",
-                memory: "4256KB",
-                submittedAt: "2026.05.03 12:15",
-                codeLength: "1020B"
-            },
-            {
-                id: 202605030015,
-                problemId: 12865,
-                problemTitle: "평범한 배낭",
-                status: "compile",
-                language: "JavaScript",
-                time: "-",
-                memory: "-",
-                submittedAt: "2026.05.03 12:22",
-                codeLength: "2310B"
-            },
-            {
-                id: 202605030002,
-                problemId: 10828,
-                problemTitle: "스택 명령 처리",
-                status: "accepted",
-                language: "C++17",
-                time: "12ms",
-                memory: "2144KB",
-                submittedAt: "2026.05.03 10:42",
-                codeLength: "812B"
-            }
-        ],
-        weakTags: [
-            {
-                tag: "DP",
-                accuracy: 0,
-                wrongCount: 2,
-                reviewCount: 2,
-                description: "배낭 문제에서 1차원 DP 갱신 방향 실수가 있었습니다.",
-                href: "/tags/dp"
-            },
-            {
-                tag: "BFS",
-                accuracy: 50,
-                wrongCount: 1,
-                reviewCount: 2,
-                description: "다중 시작점 BFS와 격자 BFS를 다시 확인하는 것이 좋습니다.",
-                href: "/tags/bfs"
-            },
-            {
-                tag: "Graph",
-                accuracy: 50,
-                wrongCount: 1,
-                reviewCount: 1,
-                description: "방문 처리 시점과 거리 배열 처리를 복습하세요.",
-                href: "/tags/graph"
-            }
-        ],
-        recommendations: [
-            {
-                title: "DP 핵심 챌린지 복습",
-                description: "배낭 문제와 LIS를 다시 풀어보세요.",
-                href: "/tests/dp-core-challenge/result",
-                icon: Target
-            },
-            {
-                title: "BFS 태그 학습",
-                description: "토마토와 미로 탐색을 연속해서 풀면 좋습니다.",
-                href: "/tags/bfs",
-                icon: Hash
-            },
-            {
-                title: "오답노트 작성",
-                description: "틀린 제출의 원인을 정리하세요.",
-                href: "/notes",
-                icon: NotebookPen
-            }
-        ]
-    },
-    {
-        id: "dp-core-challenge",
-        title: "DP 핵심 챌린지",
-        description: "점화식 설계, LIS, 0/1 배낭을 포함한 DP 집중 테스트입니다.",
-        totalScore: 700,
-        myScore: 120,
-        averageScore: 218,
-        topScore: 640,
-        rank: 67,
-        participants: 94,
-        grade: "D",
-        durationMinutes: 180,
-        timeSpentMinutes: 177,
-        startedAtText: "2026.04.25 09:00",
-        submittedAtText: "2026.04.25 11:57",
-        tags: ["DP", "LIS", "Knapsack"],
-        problems: [
-            {
-                id: 1463,
-                order: 1,
-                title: "1로 만들기",
-                difficulty: "Medium",
-                status: "todo",
-                points: 120,
-                earned: 0,
-                attempts: 0,
-                solvedRate: 49.5,
-                timeSpentMinutes: 35,
-                tags: ["dp"],
-                note: "점화식 정의를 먼저 복습하세요."
-            },
-            {
-                id: 11053,
-                order: 2,
-                title: "가장 긴 증가하는 부분 수열",
-                difficulty: "Medium",
-                status: "solved",
-                points: 140,
-                earned: 120,
-                attempts: 2,
-                solvedRate: 63.3,
-                timeSpentMinutes: 45,
-                tags: ["dp", "lis"],
-                note: "O(N²) 풀이로 통과했습니다.",
-                lastSubmissionId: 202605020101
-            },
-            {
-                id: 12865,
-                order: 3,
-                title: "평범한 배낭",
-                difficulty: "Hard",
-                status: "wrong",
-                points: 180,
-                earned: 0,
-                attempts: 3,
-                solvedRate: 38.1,
-                timeSpentMinutes: 63,
-                tags: ["dp", "knapsack"],
-                note: "갱신 방향 실수로 오답이 발생했습니다.",
-                lastSubmissionId: 202605030004
-            }
-        ],
-        submissions: [
-            {
-                id: 202605020101,
-                problemId: 11053,
-                problemTitle: "가장 긴 증가하는 부분 수열",
-                status: "accepted",
-                language: "C++17",
-                time: "16ms",
-                memory: "2480KB",
-                submittedAt: "2026.04.25 10:22",
-                codeLength: "920B"
-            },
-            {
-                id: 202605030004,
-                problemId: 12865,
-                problemTitle: "평범한 배낭",
-                status: "wrong",
-                language: "C++17",
-                time: "20ms",
-                memory: "4256KB",
-                submittedAt: "2026.04.25 11:42",
-                codeLength: "1020B"
-            }
-        ],
-        weakTags: [
-            {
-                tag: "Knapsack",
-                accuracy: 0,
-                wrongCount: 3,
-                reviewCount: 3,
-                description: "0/1 배낭의 갱신 방향과 상태 정의를 복습하세요.",
-                href: "/tags/dp"
-            },
-            {
-                tag: "DP",
-                accuracy: 33,
-                wrongCount: 3,
-                reviewCount: 4,
-                description: "기저 상태와 점화식 정의를 먼저 적는 습관이 필요합니다.",
-                href: "/tags/dp"
-            }
-        ],
-        recommendations: [
-            {
-                title: "평범한 배낭 다시 풀기",
-                description: "1차원 DP 갱신 방향을 다시 확인하세요.",
-                href: "/problems/12865/solve",
-                icon: Target
-            },
-            {
-                title: "DP 태그 복습",
-                description: "상태 정의부터 다시 정리하세요.",
-                href: "/tags/dp",
-                icon: Hash
-            }
-        ]
-    }
-];
-
 const DIFFICULTY_OPTIONS: readonly DifficultyFilter[] = ["전체", "Easy", "Medium", "Hard"];
 const STATUS_OPTIONS: readonly ProblemStatusFilter[] = ["전체", "해결", "오답", "미해결", "복습"];
 const SORT_OPTIONS: readonly SortOption[] = ["order", "score-desc", "score-asc", "difficulty", "status", "accuracy-asc"];
@@ -486,8 +174,55 @@ const gradeMeta: Record<ResultGrade, { label: string; variant: "blue" | "green" 
     D: { label: "D", variant: "red", message: "핵심 개념부터 다시 복습하는 것이 좋습니다." }
 };
 
-function getResult(id: string) {
-    return TEST_RESULTS.find((result) => result.id === id);
+function normalizeResultFromApi(data: unknown): TestResult | null {
+    const payload = data as { result?: Partial<TestResult>; test?: { id?: string; title?: string; totalScore?: number }; problems?: ResultProblem[] } | null;
+    const result = payload?.result;
+
+    if (!result?.id || !result.title) {
+        return null;
+    }
+
+    const problems = Array.isArray(result.problems) ? result.problems : Array.isArray(payload?.problems) ? payload.problems : [];
+    const totalScore = Number(result.totalScore ?? payload?.test?.totalScore ?? problems.reduce((sum, problem) => sum + Number(problem.points ?? 0), 0));
+    const myScore = Number(result.myScore ?? problems.reduce((sum, problem) => sum + Number(problem.earned ?? 0), 0));
+
+    return {
+        id: String(result.id),
+        title: String(result.title),
+        description: String(result.description ?? ""),
+        totalScore,
+        myScore,
+        averageScore: Number(result.averageScore ?? myScore),
+        topScore: Number(result.topScore ?? myScore),
+        rank: Number(result.rank ?? 1),
+        participants: Number(result.participants ?? 0),
+        grade: (result.grade === "S" || result.grade === "A" || result.grade === "B" || result.grade === "C" ? result.grade : "D") as ResultGrade,
+        durationMinutes: Number(result.durationMinutes ?? 0),
+        timeSpentMinutes: Number(result.timeSpentMinutes ?? 0),
+        startedAtText: String(result.startedAtText ?? "-"),
+        submittedAtText: String(result.submittedAtText ?? "-"),
+        tags: Array.isArray(result.tags) ? result.tags.map(String) : [],
+        problems: problems.map((problem, index) => ({
+            id: Number(problem.id),
+            order: Number(problem.order ?? index + 1),
+            title: String(problem.title ?? ""),
+            difficulty: (problem.difficulty === "Medium" || problem.difficulty === "Hard" ? problem.difficulty : "Easy") as Difficulty,
+            status: (problem.status === "solved" || problem.status === "wrong" || problem.status === "review" ? problem.status : "todo") as ProblemStatus,
+            points: Number(problem.points ?? 0),
+            earned: Number(problem.earned ?? 0),
+            attempts: Number(problem.attempts ?? 0),
+            solvedRate: Number(problem.solvedRate ?? 0),
+            timeSpentMinutes: Number(problem.timeSpentMinutes ?? 0),
+            tags: Array.isArray(problem.tags) ? problem.tags.map(String) : [],
+            note: String(problem.note ?? ""),
+            lastSubmissionId: problem.lastSubmissionId,
+        })),
+        submissions: Array.isArray(result.submissions) ? result.submissions as ResultSubmission[] : [],
+        weakTags: Array.isArray(result.weakTags) ? result.weakTags as WeakTag[] : [],
+        recommendations: Array.isArray(result.recommendations)
+            ? result.recommendations.map((item) => ({ ...item, icon: RotateCcw })) as TestResult["recommendations"]
+            : [],
+    };
 }
 
 function getScoreRate(result: TestResult) {
@@ -967,7 +702,8 @@ function NotFoundResult({ id }: { id: string }) {
 export default function TestResultPage() {
     const params = useParams<{ id: string }>();
     const id = String(params.id ?? "");
-    const result = getResult(id);
+    const [result, setResult] = useState<TestResult | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const [activeTab, setActiveTab] = useState<ResultTab>("summary");
     const [keyword, setKeyword] = useState("");
@@ -975,6 +711,50 @@ export default function TestResultPage() {
     const [status, setStatus] = useState<ProblemStatusFilter>("전체");
     const [sort, setSort] = useState<SortOption>("order");
     const [viewMode, setViewMode] = useState<ViewMode>("card");
+
+    useEffect(() => {
+        let ignore = false;
+
+        async function loadResult() {
+            try {
+                setIsLoading(true);
+
+                const response = await fetch(`/api/tests/${encodeURIComponent(id)}/result`, { cache: "no-store" });
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message ?? "테스트 결과를 불러오지 못했습니다.");
+                }
+
+                const nextResult = normalizeResultFromApi(data);
+
+                if (!nextResult) {
+                    throw new Error("테스트 결과 API 응답 형식이 올바르지 않습니다.");
+                }
+
+                if (!ignore) {
+                    setResult(nextResult);
+                }
+            } catch (error) {
+                if (!ignore) {
+                    console.error("Failed to load test result", error);
+                    setResult(null);
+                }
+            } finally {
+                if (!ignore) {
+                    setIsLoading(false);
+                }
+            }
+        }
+
+        if (id) {
+            void loadResult();
+        }
+
+        return () => {
+            ignore = true;
+        };
+    }, [id]);
 
     const filteredProblems = useMemo(() => {
         if (!result) return [];
@@ -1012,6 +792,16 @@ export default function TestResultPage() {
             }
         });
     }, [result, keyword, difficulty, status, sort]);
+
+    if (isLoading) {
+        return (
+            <AppShell title="결과를 불러오는 중입니다" description="DB에서 테스트 결과를 읽고 있습니다.">
+                <Card className="p-6 text-sm font-bold text-slate-500">
+                    테스트 결과 데이터를 불러오는 중입니다.
+                </Card>
+            </AppShell>
+        );
+    }
 
     if (!result) {
         return <NotFoundResult id={id} />;
