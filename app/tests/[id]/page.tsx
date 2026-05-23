@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ComponentType } from "react";
 import AppShell from "@/components/layout/AppShell";
 import {
@@ -488,6 +488,70 @@ const analysisToneClass: Record<TestDetail["analysis"][number]["tone"], string> 
 
 function getTest(id: string) {
     return TESTS.find((test) => test.id === id);
+}
+
+function normalizeTestFromApi(data: unknown): TestDetail | null {
+    const payload = data as { test?: Partial<TestDetail> & { durationMin?: number }; problems?: TestProblem[] } | null;
+    const test = payload?.test;
+
+    if (!test?.id || !test.title) {
+        return null;
+    }
+
+    const problems = Array.isArray(test.problems)
+        ? test.problems
+        : Array.isArray(payload?.problems)
+            ? payload.problems
+            : [];
+    const totalScore = Number(test.totalScore ?? problems.reduce((sum, problem) => sum + Number(problem.points ?? problem.score ?? 0), 0));
+
+    return {
+        id: String(test.id),
+        title: String(test.title),
+        description: String(test.description ?? ""),
+        category: String(test.category ?? test.type ?? "mock") as TestCategory,
+        difficulty: (test.difficulty === "Medium" || test.difficulty === "Hard" ? test.difficulty : "Easy") as Difficulty,
+        status: (test.status === "scheduled" || test.status === "completed" || test.status === "review" ? test.status : "open") as TestStatus,
+        recommended: Boolean(test.recommended ?? true),
+        featured: Boolean(test.featured ?? false),
+        totalScore,
+        myScore: test.myScore == null ? null : Number(test.myScore),
+        durationMinutes: Number(test.durationMinutes ?? test.durationMin ?? 0),
+        participants: Number(test.participants ?? 0),
+        averageScore: Number(test.averageScore ?? 0),
+        rank: test.rank == null ? null : Number(test.rank),
+        startAt: String(test.startAt ?? ""),
+        startAtText: String(test.startAtText ?? "-"),
+        endAt: String(test.endAt ?? ""),
+        endAtText: String(test.endAtText ?? "-"),
+        updatedAt: String(test.updatedAt ?? ""),
+        tags: Array.isArray(test.tags) ? test.tags.map(String) : [],
+        companies: Array.isArray(test.companies) ? test.companies.map(String) : [],
+        rules: Array.isArray(test.rules) ? test.rules.map(String) : [],
+        guide: Array.isArray(test.guide) ? test.guide.map(String) : [],
+        analysis: Array.isArray(test.analysis) ? test.analysis as TestDetail["analysis"] : [],
+        problems: problems.map((problem, index) => ({
+            ...problem,
+            order: Number(problem.order ?? index + 1),
+            id: Number(problem.id),
+            title: String(problem.title ?? ""),
+            difficulty: (problem.difficulty === "Medium" || problem.difficulty === "Hard" ? problem.difficulty : "Easy") as Difficulty,
+            category: String(problem.category ?? ""),
+            status: (problem.status === "solved" || problem.status === "wrong" || problem.status === "review" ? problem.status : "todo") as ProblemStatus,
+            score: Number(problem.score ?? problem.points ?? 0),
+            points: Number(problem.points ?? problem.score ?? 0),
+            solvedRate: Number(problem.solvedRate ?? 0),
+            submissions: Number(problem.submissions ?? 0),
+            timeLimit: String(problem.timeLimit ?? "-"),
+            memoryLimit: String(problem.memoryLimit ?? "-"),
+            tags: Array.isArray(problem.tags) ? problem.tags.map(String) : [],
+            memo: String(problem.memo ?? ""),
+            recommendedOrder: Number(problem.recommendedOrder ?? problem.order ?? index + 1),
+            required: Boolean(problem.required ?? true),
+            estimatedMinutes: Number(problem.estimatedMinutes ?? 0),
+            reason: String(problem.reason ?? ""),
+        })),
+    };
 }
 
 function getSolvedCount(test: TestDetail) {

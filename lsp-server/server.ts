@@ -66,7 +66,9 @@ function isClangCompiler(compilerPath: string) {
 const PORT = Number(process.env.LSP_PORT ?? 4001);
 const WORKSPACE_ROOT = path.resolve(process.cwd(), ".lsp-workspace");
 
-const DEFAULT_JAVA_HOME = "C:\\Program Files\\Java\\jdk-26.0.1";
+const DEFAULT_JAVA_HOME = isWindows()
+    ? "C:\\Program Files\\Java\\jdk-26.0.1"
+    : "/usr/lib/jvm/java-21-openjdk";
 const JAVA_HOME = process.env.JAVA_HOME || DEFAULT_JAVA_HOME;
 
 const JAVA_COMMAND =
@@ -75,7 +77,7 @@ const JAVA_COMMAND =
 
 const JDTLS_HOME =
     process.env.JDTLS_HOME ||
-    "C:\\tools\\jdtls";
+    (isWindows() ? "C:\\tools\\jdtls" : "/usr/share/jdtls");
 
 const CLANGD_COMMAND =
     process.env.CLANGD_PATH ||
@@ -264,6 +266,9 @@ function getCppCompilerCandidates(): string[] {
     const candidates = [
         process.env.CPP_COMPILER_PATH,
         process.env.CXX,
+
+        "/usr/bin/g++",
+        "/usr/local/bin/g++",
 
         "C:/msys64/ucrt64/bin/g++.exe",
         "C:/msys64/mingw64/bin/g++.exe",
@@ -878,9 +883,6 @@ function createJavaLanguageServer(): ChildProcessWithoutNullStreams {
 
             "-Xmx1G",
 
-            "--enable-final-field-mutation=ALL-UNNAMED",
-            "--illegal-final-field-mutation=allow",
-
             "--add-modules=ALL-SYSTEM",
             "--add-opens",
             "java.base/java.util=ALL-UNNAMED",
@@ -899,10 +901,7 @@ function createJavaLanguageServer(): ChildProcessWithoutNullStreams {
         workspace,
         {
             env: {
-                ...process.env,
-                JDK_JAVA_OPTIONS:
-                    process.env.JDK_JAVA_OPTIONS ||
-                    "--enable-final-field-mutation=ALL-UNNAMED --illegal-final-field-mutation=allow"
+                ...process.env
             }
         }
     );

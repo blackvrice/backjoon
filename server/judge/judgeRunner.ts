@@ -63,7 +63,7 @@ export function runInDocker(
         const stderrLimitBytes =
             options.stderrLimitBytes ?? DEFAULT_STDERR_LIMIT_BYTES;
 
-        const workspacePath = toDockerVolumePath(options.workspacePath);
+        const workspaceMountArgs = createWorkspaceMountArgs(options.workspacePath);
 
         const dockerArgs = [
             "run",
@@ -90,11 +90,10 @@ export function runInDocker(
 
             "--init",
 
-            "-v",
-            `${workspacePath}:/app`,
+            ...workspaceMountArgs,
 
             "-w",
-            "/app",
+            "/workspace",
 
             options.image,
 
@@ -112,7 +111,7 @@ export function runInDocker(
         let outputLimitExceeded = false;
         let resolved = false;
 
-        const child = spawn("docker", dockerArgs, {
+        const child = spawn(getDockerBin(), dockerArgs, {
             windowsHide: true,
             env: {
                 ...process.env,
@@ -200,7 +199,7 @@ export function runInDocker(
 /** Docker 설치 확인 */
 export function checkDockerAvailable(): Promise<boolean> {
     return new Promise((resolve) => {
-        const child = spawn("docker", ["--version"], {
+        const child = spawn(getDockerBin(), ["--version"], {
             windowsHide: true,
             env: {
                 ...process.env,
@@ -225,7 +224,7 @@ export function checkDockerAvailable(): Promise<boolean> {
  */
 export function pullDockerImage(image: string): Promise<boolean> {
     return new Promise((resolve) => {
-        const child = spawn("docker", ["pull", image], {
+        const child = spawn(getDockerBin(), ["pull", image], {
             windowsHide: true,
             stdio: "ignore",
             env: {
@@ -276,6 +275,10 @@ function createContainerName(): string {
     return `judge_${Date.now()}_${crypto.randomBytes(6).toString("hex")}`;
 }
 
+function getDockerBin(): string {
+    return process.env.DOCKER_BIN?.trim() || "docker";
+}
+
 /**
  * Docker Desktop on Windows에서는 volume source path가
  * C:\web\backjoon\... 형태일 때보다 C:/web/backjoon/... 형태가 안정적입니다.
@@ -290,6 +293,26 @@ function toDockerVolumePath(workspacePath: string): string {
     return resolvedPath;
 }
 
+function createWorkspaceMountArgs(workspacePath: string): string[] {
+    const workspaceVolume = process.env.JUDGE_WORKSPACE_VOLUME?.trim();
+
+    if (!workspaceVolume) {
+        return ["-v", `${toDockerVolumePath(workspacePath)}:/workspace`];
+    }
+
+    const volumeSubpath = path.basename(path.resolve(workspacePath));
+
+    return [
+        "--mount",
+        [
+            "type=volume",
+            `source=${workspaceVolume}`,
+            "target=/workspace",
+            `volume-subpath=${volumeSubpath}`,
+        ].join(","),
+    ];
+}
+
 function killDockerProcess(pid: number | undefined): void {
     if (!pid) return;
 
@@ -302,7 +325,7 @@ function killDockerProcess(pid: number | undefined): void {
 
 function removeContainer(containerName: string): void {
     try {
-        spawn("docker", ["rm", "-f", containerName], {
+        spawn(getDockerBin(), ["rm", "-f", containerName], {
             windowsHide: true,
             stdio: "ignore",
             env: {

@@ -1,26 +1,20 @@
 [
   {
-    "directory": "C:/web/backjoon/.lsp-workspace/cpp",
-    "file": "C:/web/backjoon/.lsp-workspace/cpp/Main.cpp",
+    "directory": "/app/.lsp-workspace/cpp",
+    "file": "/app/.lsp-workspace/cpp/Main.cpp",
     "arguments": [
-      "C:/msys64/ucrt64/bin/g++.exe",
+      "/usr/bin/g++",
       "-xc++",
       "-std=c++17",
       "-Wall",
       "-Wextra",
       "-O2",
       "-I",
-      "C:/web/backjoon/.lsp-workspace/cpp",
-      "-isystem",
-      "C:/msys64/ucrt64/include/c++/15.2.0",
-      "-isystem",
-      "C:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32",
-      "-isystem",
-      "C:/msys64/ucrt64/include",
+      "/app/.lsp-workspace/cpp",
       "-c",
-      "C:/web/backjoon/.lsp-workspace/cpp/Main.cpp",
+      "/app/.lsp-workspace/cpp/Main.cpp",
       "-o",
-      "C:/web/backjoon/.lsp-workspace/cpp/Main.o"
+      "/app/.lsp-workspace/cpp/Main.o"
     ]
   }
 ]

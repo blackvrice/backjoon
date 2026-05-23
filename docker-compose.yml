@@ -30,6 +30,7 @@ services:
     environment:
       NODE_ENV: production
       DATABASE_URL: postgresql://backjoon:backjoon1234@postgres:5432/backjoon?schema=public
+      JUDGE_RUNNER_URL: http://judge-api:4002/run
     ports:
       - "3000:3000"
 
@@ -49,9 +50,30 @@ services:
       DATABASE_URL: postgresql://backjoon:backjoon1234@postgres:5432/backjoon?schema=public
       DOCKER_HOST: unix:///var/run/docker.sock
       DOCKER_BIN: /usr/bin/docker
+      JUDGE_WORKSPACE_VOLUME: backjoon_judge_workspaces
     command: npm run judge
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - backjoon_judge_workspaces:/tmp/backjoon-judge
+
+  judge-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    image: backjoon-judge
+    container_name: backjoon-judge-api
+    restart: unless-stopped
+    user: root
+    environment:
+      NODE_ENV: production
+      DOCKER_HOST: unix:///var/run/docker.sock
+      DOCKER_BIN: /usr/bin/docker
+      JUDGE_WORKSPACE_VOLUME: backjoon_judge_workspaces
+      JUDGE_API_PORT: 4002
+    command: npm run judge:api
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - backjoon_judge_workspaces:/tmp/backjoon-judge
 
   lsp:
     build:
@@ -64,9 +86,22 @@ services:
       - web
     environment:
       NODE_ENV: production
+      CPP_COMPILER_PATH: /usr/bin/g++
+      CLANGD_PATH: /usr/bin/clangd
+      CLANGD_QUERY_DRIVER: /usr/bin/g++
+      JAVA_HOME: /usr/lib/jvm/java-21-openjdk
+      JAVA_PATH: /usr/bin/java
+      JDTLS_HOME: /usr/share/jdtls
+      JDTLS_CONFIG: /usr/share/jdtls/config_linux
+      PYRIGHT_LANGSERVER_PATH: /app/node_modules/.bin/pyright-langserver
+      TYPESCRIPT_LANGUAGE_SERVER_PATH: /app/node_modules/.bin/typescript-language-server
     command: npm run lsp
     ports:
       - "4001:4001"
+    volumes:
+      - ./.lsp-workspace:/app/.lsp-workspace
 
 volumes:
   backjoon_postgres_data:
+  backjoon_judge_workspaces:
+    name: backjoon_judge_workspaces

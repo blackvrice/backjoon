@@ -1476,7 +1476,7 @@ export default function ProblemSolvePage() {
                 ]);
             }
 
-            if (isSubmit) {
+            if (isSubmit && data.submissionId) {
                 router.push(`/problems/${problem.id}/submissions`);
                 return;
             }
